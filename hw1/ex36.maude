@@ -1,0 +1,16 @@
+mod PCP is including NAT .
+  sorts Symbol String .  subsort Nat < Symbol < String .
+  sorts Tile Tiles .     subsort Tile < Tiles .
+  op . : -> String .                                            --- empty string
+  op __ : String String -> String [assoc comm id:.] .		--- string concatenation
+  op _[_,_] : String Nat Nat -> Tile [prec 3] .           	--- first string is the label
+  op __ : Tiles Tiles -> Tiles [assoc comm] .                   --- concatenation of tiles
+  var L L' : String . vars R R' S S' : Nat .
+  rl L[R,S] L'[R',S'] => L[R,S] L'[R',S'] (L L')[R + R', S + S'] .  --- the only rule
+endm
+
+search[1] 1[2, 0] 2[0, 3] =>* L[S,S] Ts:Tiles .
+search[1] 1[4, 0] 2[0, 6] =>* L[S,S] Ts:Tiles .
+search[1] 1[24, 0] 2[0,52] =>* L[S,S] Ts:Tiles .
+
+q

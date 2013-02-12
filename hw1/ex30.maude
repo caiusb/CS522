@@ -1,0 +1,49 @@
+mod INT-SET is including INT .
+  sort IntSet .
+  subsort Int < IntSet .
+  
+  op empty : -> IntSet .
+  op __ : IntSet IntSet -> IntSet [comm assoc id: empty prec 1] .
+  op _in_ : Int IntSet -> Bool .
+  op _u_ : IntSet IntSet -> IntSet [comm assoc prec 2] . ---union
+  op _n_ : IntSet IntSet -> IntSet [comm assoc prec 2] . ---intersection
+  op _/_ : IntSet IntSet -> IntSet [prec 2] . ---difference
+  op _d_ : IntSet IntSet -> IntSet [comm assoc prec 2] . ---symetric difference
+
+  vars A B : IntSet .
+  vars I X : Int .
+  
+  eq I in I A = true .
+  eq I in A = false [owise] . 
+  
+  eq I I = I .
+  eq A u B = A B .
+
+  eq (I A) n (I B) = I (A n B) .
+  eq A n B = empty [owise] .
+
+  eq (I A) / (I B) = A / B .
+  eq (I A) / B = I (A / B) .
+  eq A / B = empty . 
+
+  eq A d B = (A / B) u (B / A) .
+  
+endm 
+
+red 1 in 1 2 3 4 5 6 .
+red 9 in 1 2 3 4 .
+
+red 1 2 3 4 u 4 5 6 .
+red 1 2 3 4 u 5 6 7 8 .
+
+red 1 2 3 4 n 3 4 5 6 .
+red 1 2 3 4 n 5 6 7 8 .
+
+red 1 2 3 4 / 4 5 .
+red 1 2 3 4 / 5 6 7 8 .
+red 1 2 3 4 / 1 2 3 4 .
+
+red 1 2 3 4 d 3 4 5 6 .
+red 1 2 3 4 d 1 2 3 4 .
+
+q

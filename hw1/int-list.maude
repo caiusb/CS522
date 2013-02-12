@@ -1,0 +1,101 @@
+-------------------------------------------------------------------------------
+--- The following defines associative lists of integers and list membership ---
+-------------------------------------------------------------------------------
+
+mod INT-LIST is including INT .
+  sort IntList .
+  subsort Int < IntList .
+  op nil : -> IntList .
+  op __ : IntList IntList -> IntList [assoc id: nil] .
+  op _in_ : Int IntList -> Bool .
+  var I : Int .  vars L L' : IntList .
+  eq I in L I L' = true .
+  eq I in L = false [owise] .
+endm
+
+parse 1 2 3 4 5 .
+red 1 nil 2 nil 3 nil 4 nil 5 6 7 nil .
+
+------------------------------------------------------------------------------------------
+--- The following redefines lists of integers without using an associative constructor ---
+------------------------------------------------------------------------------------------
+
+mod INT-LIST is including INT .
+  sort IntList .  subsort Int < IntList .
+  op __ : Int IntList -> IntList [id: nil] .
+  op nil : -> IntList .
+endm
+
+------------------------
+--- Length of a list ---
+------------------------
+
+mod LENGTH is including INT-LIST .
+  op length : IntList -> Nat .
+  var I : Int .  var L : IntList .
+  eq length(I L) = 1 + length(L) .
+  eq length(nil) = 0 .
+endm
+
+red length(1 2 3 4 5) .   ***> should be 5
+
+--------------------------------------------------------
+--- For membership, we need to traverse the list now ---
+--------------------------------------------------------
+
+mod IN is protecting INT-LIST .
+  op _in_ : Int IntList -> Bool .
+  vars I J : Int .  var L : IntList .
+  eq I in J L = if I == J then true else I in L fi .
+  eq I in nil = false .
+endm
+
+red 3 in 2 3 4 .  ***> should be true
+red 3 in 3 4 5 .  ***> should be true
+red 3 in 1 2 3 .  ***> should be true
+red 3 in 1 2 4 .  ***> should be false
+
+--------------------------------------------------------------------
+--- Append needs to be defined as follows now;                   ---
+--- With an assoc constructor for lists, append would be trivial ---
+--------------------------------------------------------------------
+
+mod APPEND is including INT-LIST .
+  op append : IntList IntList -> IntList .
+  var I : Int .  vars L1 L2 : IntList .
+  eq append(I L1, L2) = I append(L1, L2) .
+  eq append(L1, L2 I) = append(L1, L2) I .
+  eq append(L1, nil) = L1 .
+  eq append(nil, L2) = L2 .
+endm
+
+red append(1 2 3 4, 5 6 7 8) .   ***> should be 1 2 3 4 5 6 7 8
+
+-------------------------
+--- Reverse of a list ---
+-------------------------
+
+mod REV is including APPEND .
+  op rev : IntList -> IntList .
+  var I : Int .  var L : IntList .
+  eq rev(I L) = append(rev(L), I) .
+  eq rev(nil) = nil .
+endm
+
+red rev(1 2 3 4 5) .   ***> should be 5 4 3 2 1
+
+----------------------
+--- Insertion sort ---
+----------------------
+
+mod ISORT is including INT-LIST .
+  op isort : IntList -> IntList .
+  vars I J : Int .  var L : IntList .
+  eq isort(I L) = insert(I, isort(L)) .
+  eq isort(nil) = nil .
+  op insert : Int IntList -> IntList .
+  eq insert(I, J L) = if I > J then J insert(I,L) else I J L fi .
+  eq insert(I, nil) = I .
+endm
+
+red isort(4 7 8 1 4 6 9 4 2 8 3 2 7 9) .   ***> should be 1 2 2 3 4 4 4 6 7 7 8 8 9 9

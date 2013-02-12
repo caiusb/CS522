@@ -1,0 +1,33 @@
+mod TAPE is
+  sorts Cell Tape .
+  ops 0 1 : -> Cell .
+  op _:_ : Cell Tape -> Tape .
+  op zeros : -> Tape .
+endm
+
+mod TURING-MACHINE is including TAPE .
+  sorts State Configuration .
+  op _(_,_) : State Tape Tape -> Configuration .
+  var S : State .  var L R : Tape .
+  eq S(zeros,R) = S(0 : zeros, R) .
+  eq S(L,zeros) = S(L, 0 : zeros) .
+endm
+
+mod TURING-ADD-NO-STREAMS is including TURING-MACHINE .
+  ops qs q1 q2 q3 q4 q5 qh : -> State .
+  vars L R : Tape . var B : Cell .
+  rl qs(L, 1 : R) => qs(1 : L, R) .
+  rl qs(L, 0 : R) => q1(0 : L, R) .
+  rl q1(B : L, 0 : R) => qh(L, B : 0 : R) . ---HALT
+  rl q1(L, 1 : R) => q2(L, 0 : R) .
+  rl q2(B : L, R) => q3(L, B : R) .
+  rl q3(L, 0 : R) => q4(L, 1 : R) .
+  rl q4(L, B : R) => q5(B : L, R) .
+  rl q5(L, B : R) => q1(B : L, R) .
+endm
+
+rew qs(zeros, 1 : 1 : 1 : zeros) .
+rew qs(zeros, 1 : 1 : 1 : 0 : 1 : zeros) .
+rew qs(zeros, 1 : 1 : 1 : 1 : 0 : 1 : 1 : 1 : 1 : 1 : zeros) .
+
+q

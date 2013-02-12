@@ -1,0 +1,82 @@
+-----------------------------------------------------------
+--- The following defines constructors for binary trees ---
+-----------------------------------------------------------
+
+mod TREE is including INT .
+  sort Tree .
+  op ___ : Tree Int Tree -> Tree .
+  op empty : -> Tree .
+endm
+
+-----------------------------------------------------------------------
+--- Mirror of a tree is one which swaps all left and right siblings ---
+-----------------------------------------------------------------------
+
+mod MIRROR is including TREE .
+  op mirror : Tree -> Tree .
+  vars L R : Tree .  var I : Int .
+  eq mirror(L I R) = mirror(R) I mirror(L) .
+  eq mirror(empty) = empty .
+endm
+
+red mirror((empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .
+***> should be (empty 2 (empty 6 empty)) 5 ((empty 1 empty) 3 empty)
+
+------------------------------------------
+--- Searching for an integer in a tree ---
+------------------------------------------
+
+mod SEARCH is including TREE .
+  op search : Int Tree -> Bool .
+  vars I J : Int .  vars L R : Tree .
+  eq search(I, L I R) = true .
+ ceq search(I, L J R) = search(I, L) or search(I, R) if I =/= J .
+  eq search(I, empty) = false .
+endm
+
+red search(6, (empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .
+***> should be true
+red search(7, (empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .
+***> should be false
+
+----------------------------------------
+--- Next flattens a tree into a list ---
+----------------------------------------
+
+in int-list  --- we need to include the lists, too, for append
+
+mod FLATTEN is
+  including APPEND .
+  including TREE .
+  op flatten : Tree -> IntList .
+  vars L R : Tree .  var I : Int .
+  eq flatten(L I R) = append(flatten(L), I flatten(R)) .
+  eq flatten(empty) = nil .
+endm
+
+
+red flatten((empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .  ***> should be 3 1 5 6 2
+
+mod PRE-FLATTEN is
+  including APPEND .
+  including TREE .
+  op pre-flatten : Tree -> IntList .
+  vars L R : Tree .  var I : Int .
+  eq pre-flatten(L I R) = append(I pre-flatten(L), pre-flatten(R)) .
+  eq pre-flatten(empty) = nil .
+endm
+
+red pre-flatten((empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .  ***> should be 5 3 1 2 6
+---red post-flatten((empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .  ***> should be 3 1 5 6 2
+
+mod POST-FLATTEN is
+  including APPEND .
+  including TREE .
+  op post-flatten : Tree -> IntList .
+  vars L R : Tree . var I : Int .
+  eq post-flatten(L I R) = append(post-flatten(L), post-flatten(R) I) .
+  eq post-flatten(empty) = nil .
+endm
+
+red post-flatten((empty 3 (empty 1 empty)) 5 ((empty 6 empty) 2 empty)) .  ***> should be 1 3 6 2 5
+

@@ -1,0 +1,35 @@
+in int-list
+in ex32
+
+mod BTSORT is
+  including INT-LIST .
+  including TREE .
+  including FLATTEN .
+
+  op btsort : IntList -> IntList .
+  op bt-insert : IntList Tree -> Tree .
+  op bt-insert-int : Int Tree -> Tree .
+
+  var A : IntList .
+  vars L R T : Tree .
+  vars E I : Int .
+
+  eq btsort(A) = flatten(bt-insert(A, empty)) .
+
+  eq bt-insert(E A, T) = bt-insert(A, bt-insert-int(E, T)) .
+  eq bt-insert(nil, T) = T .
+
+  eq bt-insert-int(E, (L I R)) = 
+    if E < I then 
+      bt-insert-int(E, L) I R 
+    else 
+      L I bt-insert-int(E, R) 
+    fi .
+  eq bt-insert-int(E, empty) = empty E empty .
+
+endm
+
+red btsort(2) .
+red btsort(4 5 3 1 9 6 7 2) .
+
+q
