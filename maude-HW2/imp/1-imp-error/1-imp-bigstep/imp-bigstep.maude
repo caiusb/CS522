@@ -25,6 +25,8 @@ rewrite < divByZeroInAndRightStmt, a |-> 1 > .
 rewrite < divByZeroInNegationStmt, a |-> 1 > .
 rewrite < divByZeroInWhileConditionStmt, a |-> 1 > .
 rewrite < divByZeroinWhileBodyStmt, a |-> 1 > .
+rewrite < divByZeroInIfThenBranch, a |-> 1 > .
+rewrite < divByZeroInIfElseBranch, a |-> 1 > .
 
 search < sumPgm > =>! Cfg:Configuration .
 
