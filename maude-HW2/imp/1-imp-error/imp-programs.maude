@@ -1,7 +1,7 @@
 mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops sumPgm collatzPgm countPrimesPgm : -> Pgm .
   ops collatzStmt multiplicationStmt primalityStmt : -> Stmt .
-  ops divByZeroStmt divByZeroInAddStmt divByZeroInLLEStmt divByZeroInRLEStmt divByZeroInAndLeftStmt divByZeroInAndRightStmt divByZeroInNegationStmt divByZeroInWhileConditionStmt divByZeroinWhileBodyStmt : ->  Stmt .
+  ops divByZeroStmt divByZeroInAddStmt divByZeroInLLEStmt divByZeroInRLEStmt divByZeroInAndLeftStmt divByZeroInAndRightStmt divByZeroInNegationStmt divByZeroInWhileConditionStmt divByZeroinWhileBodyStmt divByZeroInIfThenBranch divByZeroInIfElseBranch : ->  Stmt .
   op divByZeroPgm : -> Pgm .
 
   eq sumPgm = (
@@ -95,6 +95,18 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
 
   eq divByZeroinWhileBodyStmt = (
     while ( a <= 8 ) {
+      a = a / 0 ;
+    }
+  ) .
+
+  eq divByZeroInIfThenBranch = (
+    if ( a <= 4 ) {
+      a = a / 0 ;
+    } else {}
+  ) .
+
+  eq divByZeroInIfElseBranch = (
+    if ( a <= 0) {} else {
       a = a / 0 ;
     }
   ) .
