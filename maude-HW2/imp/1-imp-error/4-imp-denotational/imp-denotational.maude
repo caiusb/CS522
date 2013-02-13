@@ -15,4 +15,17 @@ rewrite appCPO([[multiplicationStmt]] , x |-> 25 & y |-> 5 & (q,r,z) |-> 0 ) .
 rewrite appCPO([[primalityStmt]], n |-> 1021 & (i,q,r,t,x,y,z) |-> 0 ) .
 rewrite [[countPrimesPgm]] .
 
+rewrite appCPO([[ divByZeroStmt]], a |-> 1 & c |-> 0 ) . 
+rewrite appCPO([[divByZeroInAddStmt]], c |-> 0 ) . 
+rewrite [[divByZeroPgm]] . 
+rewrite appCPO([[divByZeroInLLEStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInRLEStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInAndLeftStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInAndRightStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInNegationStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInWhileConditionStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroinWhileBodyStmt]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInIfThenBranch]], a |-> 1 ) . 
+rewrite appCPO([[divByZeroInIfElseBranch]], a |-> 1 ) .
+
 quit
