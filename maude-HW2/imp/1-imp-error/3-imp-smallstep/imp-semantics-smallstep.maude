@@ -23,6 +23,8 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
  crl o < A1 + A2,Sigma > => < A1' + A2,Sigma > if o < A1,Sigma > => < A1',Sigma > .
  crl o < A1 + A2,Sigma > => < A1 + A2',Sigma > if o < A2,Sigma > => < A2',Sigma > .
   rl o < I1 + I2,Sigma > => < I1 +Int I2,Sigma > .
+ crl o < A1 + A2,Sigma > => < error > if o < A1,Sigma > => < error > .
+ crl o < A1 + A2,Sigma > => < error > if o < A2,Sigma > => < error > .
 
 --- div
  crl o < A1 / A2,Sigma > => < A1' / A2,Sigma > if o < A1,Sigma > => < A1',Sigma > .
@@ -30,22 +32,28 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
  crl o < I1 / I2,Sigma > => < I1 /Int I2,Sigma > if I2 =/=Bool 0 .
  crl o < A1 / A2,Sigma > => < error > if o < A1,Sigma > => < error > .
  crl o < A1 / A2,Sigma > => < error > if o < A2,Sigma > => < error > .
+ crl o < I1 / I2,Sigma > => < error > if I2 ==Bool 0 .
 
 
 --- less than
  crl o < A1 <= A2,Sigma > => < A1' <= A2,Sigma > if o < A1,Sigma > => < A1',Sigma > .
  crl o < I1 <= A2,Sigma > => < I1 <= A2',Sigma > if o < A2,Sigma > => < A2',Sigma > .
   rl o < I1 <= I2,Sigma > => < I1 <=Int I2,Sigma > .
+  crl o < A1 <= A2,Sigma > => < error > if o < A1,Sigma > => < error > .
+  crl o < A1 <= A2,Sigma > => < error > if o < A2,Sigma > => < error > .
 
 --- negation
  crl o < ! B,Sigma > => < ! B',Sigma > if o < B,Sigma > => < B',Sigma > .
   rl o < ! true,Sigma > => < false,Sigma > .
   rl o < ! false,Sigma > => < true,Sigma > .
+ crl o < ! B,Sigma > => < error > if o < B,Sigma > => < error > .
 
 --- and
  crl o < B1 && B2,Sigma > => < B1' && B2,Sigma > if o < B1,Sigma > => < B1',Sigma > .
   rl o < false && B2,Sigma > => < false,Sigma > .
   rl o < true && B2,Sigma > => < B2,Sigma > .
+ crl o < B1 && B2,Sigma > => < error > if o < B1,Sigma > => < error > .
+ crl o < true && B2,Sigma > => < error > if o < B2,Sigma > => < error > .
 
 --- block
   rl o < {S},Sigma > => < S,Sigma > .
@@ -53,16 +61,19 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
 --- assignment
  crl o < X = A ;,Sigma > => < X = A' ;,Sigma > if o < A,Sigma > => < A',Sigma > .
  crl o < X = I ;,Sigma > => < {},Sigma[I / X] > if Sigma(X) =/=Bool undefined .
+ crl o < X = A ;,Sigma > => < error > if o < A,Sigma > => < error > .
 
 --- statement concat
  crl o < S1 S2,Sigma > => < S1' S2,Sigma' > if o < S1,Sigma > => < S1',Sigma' > .
   rl o < {} S2,Sigma > => < S2,Sigma > .
+ crl o < S1 S2,Sigma > => < error > if o < S1,Sigma > => < error > .
 
 --- if
  crl o < if (B) S1 else S2,Sigma > => < if (B') S1 else S2,Sigma >
   if o < B,Sigma > => < B',Sigma  > .
   rl o < if (true) S1 else S2,Sigma > => < S1,Sigma > .
   rl o < if (false) S1 else S2,Sigma > => < S2,Sigma > .
+ crl o < if (B) S1 else S2,Sigma > => < error > if o < B,Sigma > => < error > .
 
 --- while
   rl o < while (B) S,Sigma > => < if (B) {S while (B) S} else {},Sigma > .
