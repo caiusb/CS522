@@ -65,45 +65,45 @@ mod IMP-SEMANTICS-BIGSTEP is including IMP-CONFIGURATIONS-BIGSTEP .
   rl < {},Sigma > => < Sigma > .
  crl < {S},Sigma > => < Sigma' >
   if < S,Sigma > => < Sigma' > .
- crl < {S},Sigma > => < error >
-  if < S,Sigma > => < error > .
+ crl < {S},Sigma > => < halting,Sigma' >
+  if < S,Sigma > => < halting,Sigma' > .
 
  crl < X = A ;,Sigma > => < Sigma'[I / X] >
   if < A,Sigma > => < I,Sigma' > /\ Sigma(X) =/=Bool undefined .
- crl < X = A ;,Sigma > => < error >
+ crl < X = A ;,Sigma > => < halting,Sigma >
   if < A,Sigma > => < error > .
 
  crl < S1 S2,Sigma > => < Sigma2 >
   if < S1,Sigma > => < Sigma1 > /\ < S2,Sigma1 > => < Sigma2 > .
- crl < S1 S2,Sigma > => < error >
-  if < S1,Sigma > => < error > .
- crl < S1 S2,Sigma > => < error >
-  if < S1,Sigma > => < Sigma' > /\ < S2,Sigma' > => < error > .
+ crl < S1 S2,Sigma > => < halting,Sigma' >
+  if < S1,Sigma > => < halting,Sigma' > .
+ crl < S1 S2,Sigma > => < halting,Sigma'' >
+  if < S1,Sigma > => < Sigma' > /\ < S2,Sigma' > => < halting,Sigma'' > .
 
  crl < if (B) S1 else S2,Sigma > => < Sigma1 > 
-  if < B,Sigma > => < true,Sigma'  > /\ < S1,Sigma' > => < Sigma1 > .
+  if < B,Sigma > => < true,Sigma' > /\ < S1,Sigma' > => < Sigma1 > .
  crl < if (B) S1 else S2,Sigma > => < Sigma2 > 
   if < B,Sigma > => < false,Sigma' > /\ < S2,Sigma' > => < Sigma2 > .
- crl < if (B) S1 else S2,Sigma > => < error >
+ crl < if (B) S1 else S2,Sigma > => < halting,Sigma >
   if < B,Sigma > => < error > .
- crl < if (B) S1 else S2,Sigma > => < error >
-  if < B,Sigma > => < true,Sigma' > /\ < S1,Sigma' > => < error > .
- crl < if (B) S1 else S2,Sigma > => < error >
-  if < B,Sigma > => < false,Sigma' > /\ < S2,Sigma' > => < error > .
+ crl < if (B) S1 else S2,Sigma > => < halting,Sigma'' >
+  if < B,Sigma > => < true,Sigma' > /\ < S1,Sigma' > => < halting,Sigma'' > .
+ crl < if (B) S1 else S2,Sigma > => < halting,Sigma'' >
+  if < B,Sigma > => < false,Sigma' > /\ < S2,Sigma' > => < halting,Sigma'' > .
 
  crl < while (B) S,Sigma > => < Sigma' >
   if < B,Sigma > => < false,Sigma' > .
  crl < while (B) S,Sigma > => < Sigma'' > 
   if < B,Sigma > => < true,Sigma' > /\ < S while (B) S,Sigma' > => < Sigma'' > .
- crl < while (B) S,Sigma > => < error >
+ crl < while (B) S,Sigma > => < halting,Sigma >
   if < B,Sigma > => < error > .
- crl < while (B) S,Sigma > => < error > 
-  if < B,Sigma > => < true,Sigma' > /\ < S while (B) S, Sigma' > => < error > .
+ crl < while (B) S,Sigma > => < halting,Sigma'' > 
+  if < B,Sigma > => < true,Sigma' > /\ < S while (B) S, Sigma' > => < halting,Sigma'' > .
 
  crl < int Xl ; S > => < Sigma >
   if < S,(Xl |-> 0) > => < Sigma > .
- crl < int Xl ; S > => < error >
-  if < S,(Xl |-> 0) > => < error > .
+ crl < int Xl ; S > => < halting,Sigma' >
+  if < S,(Xl |-> 0) > => < halting,Sigma' > .
 
  crl < ++ X,Sigma > => < Sigma(X) +Int 1,Sigma[(Sigma(X) +Int 1) / X] >
   if Sigma(X) =/=Bool undefined .
