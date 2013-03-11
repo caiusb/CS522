@@ -3,6 +3,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops collatzStmt multiplicationStmt primalityStmt : -> Stmt .
   op sum++Pgm : -> Pgm .
   op nondet++Pgm : -> Pgm .
+  ops divByZeroStmt : -> Stmt .
 
   eq sumPgm = (
      int n, s ;
@@ -67,5 +68,9 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
      x = 1 ; 
      x = ++ x / (++ x / x) ;
   ) .  
+
+  eq divByZeroStmt = (
+     a = 6 / 0 ;
+  ) .
 
 endm
