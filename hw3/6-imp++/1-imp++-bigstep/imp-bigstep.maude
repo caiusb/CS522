@@ -14,7 +14,19 @@ rewrite < collatzPgm > .
 rewrite < multiplicationStmt, x |-> 25 & y |-> 5 & (q,r,z) |-> 0 > .
 rewrite < primalityStmt, n |-> 1021 & (i,q,r,t,x,y,z) |-> 0 > .
 rewrite < countPrimesPgm > .
-rewrite < divByZeroStmt, a |-> 0 > .
+
+rewrite < divByZeroStmt, a |-> 1 & c |-> 0 > . 
+rewrite < divByZeroInAddStmt, c |-> 0 > . 
+rewrite < divByZeroPgm > . 
+rewrite < divByZeroInLLEStmt, a |-> 1 > . 
+rewrite < divByZeroInRLEStmt, a |-> 1 > . 
+rewrite < divByZeroInAndLeftStmt, a |-> 1 > . 
+rewrite < divByZeroInAndRightStmt, a |-> 1 > . 
+rewrite < divByZeroInNegationStmt, a |-> 1 > . 
+rewrite < divByZeroInWhileConditionStmt, a |-> 1 > . 
+rewrite < divByZeroinWhileBodyStmt, a |-> 1 > . 
+rewrite < divByZeroInIfThenBranch, a |-> 1 > . 
+rewrite < divByZeroInIfElseBranch, a |-> 1 > . 
 
 search < sumPgm > =>! Cfg:Configuration .
 

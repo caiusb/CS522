@@ -3,7 +3,8 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops collatzStmt multiplicationStmt primalityStmt : -> Stmt .
   op sum++Pgm : -> Pgm .
   op nondet++Pgm : -> Pgm .
-  ops divByZeroStmt : -> Stmt .
+  ops divByZeroStmt divByZeroInAddStmt divByZeroInLLEStmt divByZeroInRLEStmt divByZeroInAndLeftStmt divByZeroInAndRightStmt divByZeroInNegationStmt divByZeroInWhileConditionStmt divByZeroinWhileBodyStmt divByZeroInIfThenBranch divByZeroInIfElseBranch : ->  Stmt .
+  op divByZeroPgm : -> Pgm .
 
   eq sumPgm = (
      int n, s ;
@@ -70,7 +71,59 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ) .  
 
   eq divByZeroStmt = (
-     a = 6 / 0 ;
+    c = a / 0 ;
+  ) .
+
+  eq divByZeroInAddStmt = (
+    c = 1 + 2 / 0 ;
+  ) .
+
+  eq divByZeroPgm = (
+    int a, b, c ;
+    a = 1 ; b = 0 ;
+    c = a / b ;
+  ) .
+
+  eq divByZeroInLLEStmt = (
+    if ( a <= 3 / 0) {} else {}
+  ) .
+
+  eq divByZeroInRLEStmt = (
+    if ( 3 / 0 <= a) {} else {}
+  ) .
+
+  eq divByZeroInAndLeftStmt = (
+    if ((a <= 3 / 0) && (a <= 1)) {} else {}
+  ) .
+
+  eq divByZeroInAndRightStmt = (
+    if ((a <= 1) && (a <= 3 / 0)) {} else {}
+  ) .
+
+  eq divByZeroInNegationStmt = (
+    if ( ! (a <= 3 / 0)) {} else {}
+  ) .
+
+  eq divByZeroInWhileConditionStmt = (
+    while ( a <= 3 / 0 ) {}
+  ) .
+
+  eq divByZeroinWhileBodyStmt = (
+    while ( a <= 8 ) {
+      a = a / 0 ;
+    }
+  ) .
+
+  eq divByZeroInIfThenBranch = (
+    if ( a <= 4 ) {
+      a = a / 0 ;
+    } else {}
+  ) .
+
+  eq divByZeroInIfElseBranch = (
+    if ( a <= 0) {} else {
+      a = a / 0 ;
+    }
   ) .
 
 endm
