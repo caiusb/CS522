@@ -1,6 +1,9 @@
 mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops sumPgm collatzPgm countPrimesPgm : -> Pgm .
   ops collatzStmt multiplicationStmt primalityStmt : -> Stmt .
+  op sum++Pgm : -> Pgm .
+  op nondet++Pgm : -> Pgm .
+
   eq sumPgm = (
      int n, s ;
      n = 100 ;
@@ -51,4 +54,18 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
        if (1 <= t) { s = s + 1 ; } else {}
        n = n + 1 ;
      }     ) .
+     
+  eq sum++Pgm = ( 
+     int m, n, s ; 
+     n = 100 ;
+     while (++ m <= n) {
+           s = s + m ; 
+     }     ) . 
+
+  eq nondet++Pgm = ( 
+     int x ; 
+     x = 1 ; 
+     x = ++ x / (++ x / x) ;
+  ) .  
+
 endm
