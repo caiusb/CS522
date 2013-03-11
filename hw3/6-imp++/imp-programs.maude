@@ -8,7 +8,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
 
   eq sumPgm = (
      int n, s ;
-     n = 100 ;
+     n = 1 ;
      while (!(n <= 0)) {
        s = s + n ;
        n = n + -1 ;
@@ -59,7 +59,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
      
   eq sum++Pgm = ( 
      int m, n, s ; 
-     n = 100 ;
+     n = 2 ;
      while (++ m <= n) {
            s = s + m ; 
      }     ) . 
