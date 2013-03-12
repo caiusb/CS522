@@ -1,5 +1,7 @@
 mod IMP-CONFIGURATIONS-BIGSTEP is including IMP-SYNTAX + STATE .
 
+  including BUFFER .
+
   sort Configuration .
   op <_,_> : AExp State -> Configuration .
   op <_,_> : BExp State -> Configuration .

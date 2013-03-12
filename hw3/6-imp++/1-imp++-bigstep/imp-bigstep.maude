@@ -1,6 +1,7 @@
 in ../../../builtins.maude
 in ../imp-syntax.maude
 in ../../state.maude
+in ../buffer.maude
 
 in imp-semantics-bigstep
 
