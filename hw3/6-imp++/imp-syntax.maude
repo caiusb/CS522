@@ -20,6 +20,7 @@ mod IMP-SYNTAX is including PL-INT + PL-BOOL + PL-ID .
   op while(_)_ : BExp Block -> Stmt [prec 59 format (b so d d s d)] .
   op halt`; : -> Stmt .
   op print(_) ; : AExp -> Stmt [prec 57] .
+  op spawn_ : Block -> Stmt [prec 58] .
 --- Pgm
   sort Pgm .
   op int_;_ : List{Id} Stmt -> Pgm [prec 70 format (nb o d ni d)] .
