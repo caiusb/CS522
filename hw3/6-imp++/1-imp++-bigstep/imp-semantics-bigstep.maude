@@ -107,5 +107,6 @@ mod IMP-SEMANTICS-BIGSTEP is including IMP-CONFIGURATIONS-BIGSTEP .
 
  crl < ++ X,Sigma > => < Sigma(X) +Int 1,Sigma[(Sigma(X) +Int 1) / X] >
   if Sigma(X) =/=Bool undefined .
+  rl < halt ;,Sigma > => < halting,Sigma > .
 
 endm
