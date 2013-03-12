@@ -28,6 +28,14 @@ rewrite < divByZeroinWhileBodyStmt, a |-> 1 > .
 rewrite < divByZeroInIfThenBranch, a |-> 1 > . 
 rewrite < divByZeroInIfElseBranch, a |-> 1 > . 
 
+rewrite < IncInIfConditionStmt, a |-> 1 > .
+rewrite < IncInIfThenStmt, a |-> 1 > . 
+rewrite < IncInIfElseStmt, a |-> 1 > .
+rewrite < IncInWhileCondStmt, a |-> 1 > .
+rewrite < IncInWhileBranchStmt, a |-> 1 > .
+rewrite < IncInAddStmt, a |-> 1 > .
+rewrite < IncInDivStmt, a |-> 1 > .
+
 search < sumPgm > =>! Cfg:Configuration .
 
 *** <new> Execute the new programs

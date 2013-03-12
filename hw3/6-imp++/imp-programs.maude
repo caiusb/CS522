@@ -5,6 +5,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   op nondet++Pgm : -> Pgm .
   ops divByZeroStmt divByZeroInAddStmt divByZeroInLLEStmt divByZeroInRLEStmt divByZeroInAndLeftStmt divByZeroInAndRightStmt divByZeroInNegationStmt divByZeroInWhileConditionStmt divByZeroinWhileBodyStmt divByZeroInIfThenBranch divByZeroInIfElseBranch : ->  Stmt .
   op divByZeroPgm : -> Pgm .
+  ops IncInIfConditionStmt IncInIfThenStmt IncInIfElseStmt IncInWhileCondStmt IncInWhileBranchStmt IncInAddStmt IncInDivStmt : -> Stmt .
 
   eq sumPgm = (
      int n, s ;
@@ -124,6 +125,41 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
     if ( a <= 0) {} else {
       a = a / 0 ;
     }
+  ) .
+
+  eq IncInIfConditionStmt = (
+    if ( ++ a <= 0 ) {} else {} 
+  ) .
+  
+  eq IncInIfThenStmt = (
+    if ( a <= 0) {
+      a = ++ a ; 
+    }
+    else {}
+  ) .
+
+  eq IncInIfElseStmt = (
+    if ( a <= 7 ) {} else {
+      a = ++ a ;
+    }
+  ) .
+
+  eq IncInWhileCondStmt = (
+    while (++ a <= 0) {}
+  ) .
+
+  eq IncInWhileBranchStmt = (
+    while (a <= 5) {
+      a = ++ a ;
+    }
+  ) .
+
+  eq IncInAddStmt = (
+    a = ++ a + 3 ;  
+  ) .
+
+  eq IncInDivStmt = (
+    a = ++ a / 1 ;
   ) .
 
 endm
