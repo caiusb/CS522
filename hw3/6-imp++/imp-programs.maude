@@ -9,6 +9,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops haltInIfThenStmt haltInIfElseStmt haltInWhileStmt haltStmt : -> Stmt .
   ops readInAddStmt readInDivStmt readInIfCondStmt readInIfThenStmt readInIfElseStmt readInWhileCondStmt readInWhileBodyStmt readStmt : -> Stmt .
   ops printStmt printInIfThenStmt printInIfElseStmt printInWhileStmt printDivZeroStmt : -> Stmt .
+  ops spawnStmt : -> Stmt .
 
   eq sumPgm = (
      int n, s ;
@@ -250,6 +251,11 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
 
   eq printDivZeroStmt = (
     print (a / 0) ; 
+  ) .
+
+  eq spawnStmt = (
+    spawn { a = 3 ; }
+    a = a + 7 ;
   ) .
 
 endm

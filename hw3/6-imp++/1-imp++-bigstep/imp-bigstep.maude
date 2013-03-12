@@ -57,6 +57,8 @@ rewrite < printInIfElseStmt, a |-> 1 > .
 rewrite < printInWhileStmt, a |-> 1 > .
 rewrite < printDivZeroStmt, a |-> 1 > .
 
+rewrite < spawnStmt, a |-> 1 > .
+
 search < sumPgm > =>! Cfg:Configuration .
 
 *** <new> Execute the new programs
