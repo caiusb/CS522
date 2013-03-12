@@ -36,6 +36,11 @@ rewrite < IncInWhileBranchStmt, a |-> 1 > .
 rewrite < IncInAddStmt, a |-> 1 > .
 rewrite < IncInDivStmt, a |-> 1 > .
 
+rewrite < haltInIfThenStmt, a |-> 1 > .
+rewrite < haltInIfElseStmt, a |-> 1 > .
+rewrite < haltInWhileStmt, a |-> 1 > .
+rewrite < haltStmt, a |-> 1 > .
+
 search < sumPgm > =>! Cfg:Configuration .
 
 *** <new> Execute the new programs

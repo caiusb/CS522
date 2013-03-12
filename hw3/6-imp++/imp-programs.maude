@@ -6,6 +6,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops divByZeroStmt divByZeroInAddStmt divByZeroInLLEStmt divByZeroInRLEStmt divByZeroInAndLeftStmt divByZeroInAndRightStmt divByZeroInNegationStmt divByZeroInWhileConditionStmt divByZeroinWhileBodyStmt divByZeroInIfThenBranch divByZeroInIfElseBranch : ->  Stmt .
   op divByZeroPgm : -> Pgm .
   ops IncInIfConditionStmt IncInIfThenStmt IncInIfElseStmt IncInWhileCondStmt IncInWhileBranchStmt IncInAddStmt IncInDivStmt : -> Stmt .
+  ops haltInIfThenStmt haltInIfElseStmt haltInWhileStmt haltStmt : -> Stmt .
 
   eq sumPgm = (
      int n, s ;
@@ -160,6 +161,28 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
 
   eq IncInDivStmt = (
     a = ++ a / 1 ;
+  ) .
+  
+  eq haltInIfThenStmt = (
+    if (a <= 7) {
+      halt ;
+    } else {}
+  ) .
+  
+  eq haltInIfElseStmt = (
+    if (a <= 0) {} else {
+      halt ;
+    }
+  ) .
+  
+  eq haltInWhileStmt = (
+    while (a <= 7) {
+      halt ;
+    }
+  ) .
+
+  eq haltStmt = (
+    halt ;
   ) .
 
 endm
