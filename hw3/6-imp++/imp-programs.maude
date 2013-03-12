@@ -215,7 +215,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ) .
   
   eq readInWhileBodyStmt = (
-    while (a <= 0) {
+    while (a <= 3) {
       a = read() ;
     }
   ) .
