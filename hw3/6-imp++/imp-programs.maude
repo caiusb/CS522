@@ -7,6 +7,7 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   op divByZeroPgm : -> Pgm .
   ops IncInIfConditionStmt IncInIfThenStmt IncInIfElseStmt IncInWhileCondStmt IncInWhileBranchStmt IncInAddStmt IncInDivStmt : -> Stmt .
   ops haltInIfThenStmt haltInIfElseStmt haltInWhileStmt haltStmt : -> Stmt .
+  ops readInAddStmt readInDivStmt readInIfCondStmt readInIfThenStmt readInIfElseStmt readInWhileCondStmt readInWhileBodyStmt readStmt : -> Stmt .
 
   eq sumPgm = (
      int n, s ;
@@ -183,6 +184,44 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
 
   eq haltStmt = (
     halt ;
+  ) .
+
+  eq readInAddStmt = (
+    a = read() + 1 ;
+  ) .
+
+  eq readInDivStmt = (
+    a = read() / 1 ;
+  ) . 
+
+  eq readInIfCondStmt = (
+    if (read() <= 0) {} else {}
+  ) .
+
+  eq readInIfThenStmt = (
+    if (a <= 4) {
+      a = read() ;
+    } else {}
+  ) .
+
+  eq readInIfElseStmt = (
+    if (a <= 0) {} else {
+      a = read() ;
+    }
+  ) .
+  
+  eq readInWhileCondStmt = (
+    while (read() <= 0) {}
+  ) .
+  
+  eq readInWhileBodyStmt = (
+    while (a <= 0) {
+      a = read() ;
+    }
+  ) .
+
+  eq readStmt = (
+    a = read() ;
   ) .
 
 endm
