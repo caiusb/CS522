@@ -51,6 +51,11 @@ rewrite < readInWhileCondStmt, a |-> 1, 5 : epsilon > .
 rewrite < readInWhileBodyStmt, a |-> 1, 5 : epsilon > .
 rewrite < readStmt, a |-> 1, 5 : epsilon > .
 
+rewrite < printStmt, a |-> 1 > .
+rewrite < printInIfThenStmt, a |-> 1 > .
+rewrite < printInIfElseStmt, a |-> 1 > .
+rewrite < printInWhileStmt, a |-> 1 > .
+
 search < sumPgm > =>! Cfg:Configuration .
 
 *** <new> Execute the new programs
