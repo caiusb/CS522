@@ -110,6 +110,11 @@ mod IMP-SEMANTICS-BIGSTEP is including IMP-CONFIGURATIONS-BIGSTEP .
   if < A1,Sigma,OmegaIn > => < I1,Sigma',OmegaIn' > .
  crl < print(A1) ;,Sigma,OmegaIn > => < halting,Sigma',OmegaIn',epsilon >
   if < A1,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
+ 
+ crl < spawn S,Sigma,OmegaIn > => < Sigma',OmegaIn',OmegaOut >
+  if < S,Sigma,OmegaIn > => < Sigma',OmegaIn',OmegaOut > .
+ crl < (spawn S1) S2,Sigma,OmegaIn > => < Sigma'',OmegaIn'',OmegaOut' : OmegaOut >
+  if < S2,Sigma,OmegaIn > => < Sigma',OmegaIn',OmegaOut > /\ < S1,Sigma',OmegaIn' > => < Sigma'',OmegaIn'',OmegaOut' > .
 
   rl < read(),Sigma,I : OmegaIn > => < I,Sigma,OmegaIn > .
 
