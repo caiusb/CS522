@@ -55,6 +55,7 @@ rewrite < printStmt, a |-> 1 > .
 rewrite < printInIfThenStmt, a |-> 1 > .
 rewrite < printInIfElseStmt, a |-> 1 > .
 rewrite < printInWhileStmt, a |-> 1 > .
+rewrite < printDivZeroStmt, a |-> 1 > .
 
 search < sumPgm > =>! Cfg:Configuration .
 
