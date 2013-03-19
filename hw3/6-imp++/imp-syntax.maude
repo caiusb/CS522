@@ -24,4 +24,17 @@ mod IMP-SYNTAX is including PL-INT + PL-BOOL + PL-ID .
 --- Pgm
   sort Pgm .
   op int_;_ : List{Id} Stmt -> Pgm [prec 70 format (nb o d ni d)] .
+--- local variables
+  subsort Stmt < Pgm .
+  op int_; : List{Id} -> Stmt .
+endm
+
+mod IMP-DESUGARED-SYNTAX is including IMP-SYNTAX .
+  op let_=_in_ : Id AExp Stmt -> Stmt .
+  var X Y : Id . var L : List{Id} . var S S1 S2 S3 : Stmt .
+  eq (S1 S2) S3 = S1 (S2 S3) .
+  eq int L,X ; S = int L ; let X = 0 in S .
+  eq int .List{Id} ; S = S .
+  eq S int L ; = S .
+  eq {int L ;} = {} .
 endm

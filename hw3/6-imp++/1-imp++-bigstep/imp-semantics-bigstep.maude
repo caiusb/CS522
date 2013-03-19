@@ -1,4 +1,4 @@
-mod IMP-CONFIGURATIONS-BIGSTEP is including IMP-SYNTAX + STATE .
+mod IMP-CONFIGURATIONS-BIGSTEP is including IMP-DESUGARED-SYNTAX + STATE .
 
   including BUFFER .
 
@@ -118,10 +118,12 @@ mod IMP-SEMANTICS-BIGSTEP is including IMP-CONFIGURATIONS-BIGSTEP .
 
   rl < read(),Sigma,I : OmegaIn > => < I,Sigma,OmegaIn > .
 
+***(
  crl < int Xl ; S,OmegaIn > => < Sigma,OmegaIn',OmegaOut >
   if < S,(Xl |-> 0),OmegaIn > => < Sigma,OmegaIn',OmegaOut > .
  crl < int Xl ; S,OmegaIn > => < halting,Sigma',OmegaIn',OmegaOut >
   if < S,(Xl |-> 0),OmegaIn > => < halting,Sigma',OmegaIn',OmegaOut > .
+)***
 
  crl < ++ X,Sigma,OmegaIn > => < Sigma(X) +Int 1,Sigma[(Sigma(X) +Int 1) / X],OmegaIn >
   if Sigma(X) =/=Bool undefined .
@@ -129,5 +131,11 @@ mod IMP-SEMANTICS-BIGSTEP is including IMP-CONFIGURATIONS-BIGSTEP .
 
   rl < P > => < P,epsilon > .
   rl < S,Sigma > => < S,Sigma,epsilon > .
+
+  crl < let X = A in S,Sigma,OmegaIn,OmegaOut > => < Sigma''[Sigma'(X) / X],OmegaIn'',OmegaOut' >
+   if < A,Sigma,OmegaIn > => < I,Sigma',OmegaIn' > /\ < S,Sigma'[I / X],OmegaIn',OmegaOut > => < Sigma'',OmegaIn'',OmegaOut' > .
+
+   crl < P,OmegaIn > => < Sigma,OmegaIn',OmegaOut >
+    if < P, .State,OmegaIn,epsilon > => < Sigma,OmegaIn',OmegaOut > .
 
 endm
