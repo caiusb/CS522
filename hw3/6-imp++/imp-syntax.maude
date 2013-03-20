@@ -23,7 +23,6 @@ mod IMP-SYNTAX is including PL-INT + PL-BOOL + PL-ID .
   op spawn_ : Block -> Stmt [prec 58] .
 --- Pgm
   sort Pgm .
-  op int_;_ : List{Id} Stmt -> Pgm [prec 70 format (nb o d ni d)] .
 --- local variables
   subsort Stmt < Pgm .
   op int_; : List{Id} -> Stmt .
