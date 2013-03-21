@@ -76,7 +76,7 @@ mod IMP-SEMANTICS-BIGSTEP is including IMP-CONFIGURATIONS-BIGSTEP .
 
  crl < X = A ;,Sigma,OmegaIn > => < Sigma'[I / X],OmegaIn',epsilon >
   if < A,Sigma,OmegaIn > => < I,Sigma',OmegaIn' > /\ Sigma(X) =/=Bool undefined .
- crl < X = A ;,Sigma,OmegaIn > => < halting,Sigma',OmegaIn,epsilon >
+ crl < X = A ;,Sigma,OmegaIn > => < halting,Sigma',OmegaIn',epsilon >
   if < A,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
 
  crl < S1 S2,Sigma,OmegaIn > => < Sigma2,OmegaIn'',OmegaOut' : OmegaOut'' >
