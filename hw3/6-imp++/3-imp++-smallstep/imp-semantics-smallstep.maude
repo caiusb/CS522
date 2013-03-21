@@ -1,4 +1,7 @@
-mod IMP-CONFIGURATIONS-SMALLSTEP is including IMP-SYNTAX + STATE .
+mod IMP-CONFIGURATIONS-SMALLSTEP is including IMP-DESUGARED-SYNTAX + STATE .
+
+  including BUFFER .
+
   sorts Configuration ExtendedConfiguration .
   subsort Configuration < ExtendedConfiguration .
   op <_,_> : AExp State -> Configuration .
@@ -15,6 +18,7 @@ endm
 mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
   var X : Id .  var Sigma Sigma' : State .  var I I1 I2 : Int .  var Xl : List{Id} .
   var A A' A1 A1' A2 A2' : AExp .  var B B' B1 B1' B2 : BExp .  var S S' S1 S1' S2 : Stmt .
+  var P : Pgm .
 
 --- lookup
  crl o < X,Sigma > => < Sigma(X),Sigma > if Sigma(X) =/=Bool undefined .
@@ -79,5 +83,13 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
   rl o < while (B) S,Sigma > => < if (B) {S while (B) S} else {},Sigma > .
 
 --- program
-  rl o < int Xl ; S > => < S,(Xl |-> 0) > .
+  rl o < P > => < P, .State > .
+  crl o < let X = A in S,Sigma > => < let X = A' in S,Sigma > if o < A,Sigma > => < A',Sigma > .
+  crl o < let X = I in S,Sigma > => < let X = Sigma'(X) in S',Sigma'[Sigma(X) / X] >
+   if o < S,Sigma[I / X] > => < S',Sigma' > .
+   rl o < let X = I in {},Sigma > => < {},Sigma > .
+  crl o < let X = A in S,Sigma > => < error > if o < A,Sigma > => < error > .
+  crl o < let X = I in S,Sigma > => < error >
+   if o < S,Sigma[I / X] > => < error > .
+
 endm
