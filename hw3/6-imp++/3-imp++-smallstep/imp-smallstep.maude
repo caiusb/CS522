@@ -1,6 +1,7 @@
 in ../../../builtins.maude
 in ../imp-syntax.maude
 in ../../state.maude
+in ../buffer.maude
 
 in imp-semantics-smallstep
 
@@ -55,6 +56,9 @@ rewrite * < printInIfThenStmt, a |-> 1 > .
 rewrite * < printInIfElseStmt, a |-> 1 > . 
 rewrite * < printInWhileStmt, a |-> 1 > . 
 rewrite * < printDivZeroStmt, a |-> 1 > . 
+
+rewrite * < divByZeroInLetStmt, a |-> 1 > . 
+rewrite * < HaltInLetStmt, a |-> 1 > . 
 
 search * < sumPgm > =>! Cfg:ExtendedConfiguration .
 
