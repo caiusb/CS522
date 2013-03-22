@@ -63,6 +63,11 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
  crl o < B1 && B2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < B1,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
  crl o < true && B2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < B2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
 
+--- read & print
+  rl o < read(), Sigma, I : OmegaIn > => < I,Sigma,OmegaIn > .
+ crl o < print(A);,Sigma,OmegaIn,OmegaOut > => < print(A');,Sigma',OmegaIn',OmegaOut > if o < A,Sigma,OmegaIn > => < A',Sigma',OmegaIn' > .
+  rl o < print(I);,Sigma,OmegaIn,OmegaOut > => < {},Sigma,OmegaIn,OmegaOut : I > .
+
 --- block
   rl o < {S},Sigma,OmegaIn,OmegaOut > => < S,Sigma,OmegaIn,OmegaOut > .
 
