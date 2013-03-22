@@ -32,7 +32,7 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
  crl o < A1 + A2,Sigma,OmegaIn > => < A1' + A2,Sigma',OmegaIn' > if o < A1,Sigma,OmegaIn > => < A1',Sigma',OmegaIn' > .
  crl o < A1 + A2,Sigma,OmegaIn > => < A1 + A2',Sigma',OmegaIn' > if o < A2,Sigma,OmegaIn > => < A2',Sigma',OmegaIn' > .
   rl o < I1 + I2,Sigma,OmegaIn > => < I1 +Int I2,Sigma,OmegaIn > .
- crl o < A1 + A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn',OmegaIn' > if o < A1,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
+ crl o < A1 + A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < A1,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
  crl o < A1 + A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
 
 --- div
