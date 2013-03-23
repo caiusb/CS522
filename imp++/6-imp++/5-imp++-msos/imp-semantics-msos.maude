@@ -27,6 +27,7 @@ mod IMP-SEMANTICS-MSOS is including IMP-CONFIGURATIONS-MSOS .
   var X : Id .   var R R' : Record . var Sigma Sigma' : State .
   var I I1 I2 : Int .  var Xl : List{Id} .  var S S1 S1' S2 : Stmt .
   var A A' A1 A1' A2 A2' : AExp .  var B B' B1 B1' B2 B2' : BExp .
+  var OmegaIn OmegaOut : Buffer .
 
  crl o < X,(state = Sigma, R) > => < Sigma(X),(state = Sigma, R) > if Sigma(X) =/=Bool undefined .
  crl o < A1 + A2,R > => < A1' + A2,R' > if o < A1,R > => < A1',R' > .
@@ -56,5 +57,8 @@ mod IMP-SEMANTICS-MSOS is including IMP-CONFIGURATIONS-MSOS .
   rl o < int Xl ; S > => < S,(state = Xl |-> 0) > .
 
  crl o < ++ X,(state = Sigma, R) > => < Sigma(X) +Int 1, (state = Sigma[(Sigma(X) +Int 1) / X], R) > if Sigma(X) =/=Bool undefined .
+  rl o < read(),(input = I : OmegaIn, R) > => < I,(input = OmegaIn, R) > .
+ crl o < print(A);,R > => < print(A');,R' > if o < A,R > => < A',R' > .
+  rl o < print(I);,(output = OmegaOut, R) > => < {},(output = (OmegaOut : I), R) > .
 
 endm
