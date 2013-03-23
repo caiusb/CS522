@@ -11,6 +11,7 @@ mod IMP-CONFIGURATIONS-MSOS is including IMP-SYNTAX + STATE .
   op state`=_ : State -> Attribute .
   op input`=_ : Buffer -> Attribute [gather(&)] .
   op output`=_ : Buffer -> Attribute [gather(&)] .
+  op halting`=_ : Bool -> Attribute [gather(&)] .
 
   op <_,_> : AExp Record -> Configuration .
   op <_,_> : BExp Record -> Configuration .
@@ -60,5 +61,17 @@ mod IMP-SEMANTICS-MSOS is including IMP-CONFIGURATIONS-MSOS .
   rl o < read(),(input = I : OmegaIn, R) > => < I,(input = OmegaIn, R) > .
  crl o < print(A);,R > => < print(A');,R' > if o < A,R > => < A',R' > .
   rl o < print(I);,(output = OmegaOut, R) > => < {},(output = (OmegaOut : I), R) > .
+  
+  var T : Bool .
+  rl o < I / 0,(halting = T, R) > => < I / 0,(halting = true, R) > .
+  rl o < halt ;,(halting = T, R) > => < halt ;,(halting = true, R) > .
+
+  op top_ : Stmt -> Stmt .
+  var S' S2' : Stmt .
+ crl o < top S,(halting = T, R) > => < top S', (halting = false, R') >
+  if o < S,(halting = T, R) > => < S',(halting = false, R') > .
+ crl o < top S,(halting = T, R) > => < {},(halting = false, R') >
+  if o < S,(halting = T, R) > => < S',(halting = true, R') > .
+  rl o < top {}, R > => < {}, R > .
 
 endm
