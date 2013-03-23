@@ -1,14 +1,22 @@
 mod IMP-CONFIGURATIONS-MSOS is including IMP-SYNTAX + STATE .
+
+  including BUFFER .
+
   sorts Attribute Record Configuration ExtendedConfiguration .
   subsort Attribute < Record .
   subsort Configuration < ExtendedConfiguration .
   op empty : -> Record .
   op _,_ : Record Record -> Record [assoc comm id: empty] .
+
   op state`=_ : State -> Attribute .
+  op input`=_ : Buffer -> Attribute .
+  op output`=_ : Buffer -> Attribute .
+
   op <_,_> : AExp Record -> Configuration .
   op <_,_> : BExp Record -> Configuration .
   op <_,_> : Stmt Record -> Configuration .
-  op <_> : Pgm -> Configuration .
+  op <_> : Pgm -> Configuration . --- so I don't have to change everything
+  op <_,_> : Pgm Buffer -> Configuration .
   op o_ : Configuration -> ExtendedConfiguration [prec 80] .   --- one step
   op *_ : Configuration -> ExtendedConfiguration [prec 80] .   --- all steps
   var Cfg Cfg' : Configuration .
