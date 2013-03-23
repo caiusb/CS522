@@ -49,7 +49,7 @@ rewrite * < readInIfThenStmt, state = (a |-> 1), input = 5 > .
 rewrite * < readInIfElseStmt, state = (a |-> 1), input = 5 > . 
 rewrite * < readInWhileCondStmt, state = (a |-> 1), input = 5 > . 
 rewrite * < readInWhileBodyStmt, state = (a |-> 1), input = 5 > . 
-rewrite * < readStmt, state = (a |-> 1, input = 5 > . 
+rewrite * < readStmt, state = (a |-> 1), input = 5 > . 
 
 rewrite * < printStmt, state = (a |-> 1) > . 
 rewrite * < printInIfThenStmt, state = (a |-> 1) > . 
