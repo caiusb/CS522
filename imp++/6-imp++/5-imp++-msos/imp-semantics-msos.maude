@@ -74,4 +74,10 @@ mod IMP-SEMANTICS-MSOS is including IMP-CONFIGURATIONS-MSOS .
   if o < S,(halting = T, R) > => < S',(halting = true, R') > .
   rl o < top {}, R > => < {}, R > .
 
+  op spawn_ : Stmt -> Stmt [ditto] .
+ crl o < spawn S,R > => < spawn S',R' > if o < S,R > => < S',R' > .
+ crl o < spawn S1 S2,R > => < spawn S1 S2',R' > if o < S2,R > => < S2',R' > .
+  rl o < spawn {},R > => < {},R > .
+  eq (S1 S2) S = S1 (S2 S) . 
+
 endm
