@@ -55,7 +55,9 @@ mod IMP-SEMANTICS-MSOS is including IMP-CONFIGURATIONS-MSOS .
   rl o < if  (true) S1 else S2,R > => < S1,R > .
   rl o < if (false) S1 else S2,R > => < S2,R > .
   rl o < while (B) S,R > => < if (B) {S while (B) S} else {},R > .
-  rl o < int Xl ; S > => < S,(state = Xl |-> 0) > .
+
+  rl o < int Xl ; S,OmegaIn > => < top S,(halting = false, state = Xl |-> 0, input = OmegaIn, output = epsilon) > .
+  rl o < int Xl ; S > => < int Xl ; S,epsilon > .
 
  crl o < ++ X,(state = Sigma, R) > => < Sigma(X) +Int 1, (state = Sigma[(Sigma(X) +Int 1) / X], R) > if Sigma(X) =/=Bool undefined .
   rl o < read(),(input = I : OmegaIn, R) > => < I,(input = OmegaIn, R) > .
