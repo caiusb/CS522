@@ -34,4 +34,8 @@ mod IMP-SEMANTICS-EVALUATION-CONTEXTS is including IMP-SPLIT-PLUG-EVALUATION-CON
   rl o < C,Sigma,OmegaIn,OmegaOut >[I / 0] => < {},Sigma,OmegaIn,OmegaOut > . 
   rl o < C,Sigma,OmegaIn,OmegaOut >[halt ;] => < {},Sigma,OmegaIn,OmegaOut > . 
 
+  op spawn_ : Stmt -> Stmt [ditto] .
+  rl spawn {} => {} .
+  eq (S1 S2) S = S1 (S2 S) .
+
 endm

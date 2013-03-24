@@ -62,4 +62,10 @@ mod IMP-SPLIT-PLUG-EVALUATION-CONTEXTS is including IMP-CONFIGURATIONS-EVALUATIO
  crl split(print(A);) => (print(C);)[Syn] if split(A) => C[Syn] .
   eq plug((print(C);)[Syn]) = print(plug(C[Syn])); .
 
+  op spawn_ : Context -> Context . eq plug((spawn C)[Syn]) = spawn plug(C[Syn]) .
+ crl split(spawn S) => (spawn C)[Syn] if split(S) => C[Syn] .
+
+  op spawn__ : Stmt Context -> Context . eq plug((spawn S1 C)[Syn]) = spawn S1 plug(C[Syn]) .
+ crl split(spawn S1 S2) => (spawn S1 C)[Syn] if split(S2) => C[Syn] .
+
 endm
