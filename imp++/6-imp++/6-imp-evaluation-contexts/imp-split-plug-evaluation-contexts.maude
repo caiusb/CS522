@@ -19,7 +19,7 @@ mod IMP-SPLIT-PLUG-EVALUATION-CONTEXTS is including IMP-CONFIGURATIONS-EVALUATIO
   ops split plug : Syntax -> Syntax . --- to split Syntax into context[redex]
 
   var X : Id .  var A A1 A2 : AExp .  var B B1 B2 : BExp .  var S S1 S2 : Stmt .
-  var Sigma : State .  var I I1 : Int .  var Syn : Syntax .  var C : Context .
+  var Sigma : State .  var I1 : Int .  var Syn : Syntax .  var C : Context .
   var OmegaIn OmegaOut : Buffer .
 
   rl split(Syn) => [][Syn] .  eq plug([][Syn]) = Syn .  eq plug(Syn) = Syn .     --- start/stop contextual representation
@@ -61,8 +61,5 @@ mod IMP-SPLIT-PLUG-EVALUATION-CONTEXTS is including IMP-CONFIGURATIONS-EVALUATIO
   op print(_); : Context -> Context .
  crl split(print(A);) => (print(C);)[Syn] if split(A) => C[Syn] .
   eq plug((print(C);)[Syn]) = print(plug(C[Syn])); .
-
-  rl o < C,Sigma,OmegaIn,OmegaOut >[I / 0] => < {},Sigma,OmegaIn,OmegaOut > .
-  rl o < C,Sigma,OmegaIn,OmegaOut >[halt ;] => < {},Sigma,OmegaIn,OmegaOut > .
 
 endm
