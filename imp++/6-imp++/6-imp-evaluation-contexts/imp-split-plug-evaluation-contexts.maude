@@ -10,7 +10,6 @@ mod IMP-CONFIGURATIONS-EVALUATION-CONTEXTS is including IMP-DESUGARED-SYNTAX + S
   var Cfg Cfg' : Configuration .
  crl * Cfg => * Cfg' if o Cfg => Cfg' .
  
-  op <_> : Pgm -> Configuration .
 endm
 
 mod IMP-SPLIT-PLUG-EVALUATION-CONTEXTS is including IMP-CONFIGURATIONS-EVALUATION-CONTEXTS .
