@@ -22,11 +22,11 @@ mod TEST is including IMP-SEMANTICS-EVALUATION-CONTEXTS + IMP-PROGRAMS .  endm
 --- set trace on .
 
 rewrite * < sumPgm,epsilon > .
-rewrite * < collatzStmt, n |-> 10 & (q,r,s) |-> 0,epsilon,epsilon > .
+rewrite * < collatzStmt, n |-> 10 & q |-> 0 & r |-> 0 & s |-> 0,epsilon,epsilon > .
 rewrite * < collatzPgm,epsilon > .
-rewrite * < multiplicationStmt, x |-> 25 & y |-> 5 & (q,r,z) |-> 0,epsilon,epsilon > .
-rewrite * < primalityStmt, n |-> 1021 & (i,q,r,t,x,y,z) |-> 0,epsilon,epsilon > .
-rewrite * < countPrimesPgm,epsilon,epsilon > .
+rewrite * < multiplicationStmt, x |-> 25 & y |-> 5 & q |-> 0 & r |-> 0 & z |-> 0,epsilon,epsilon > .
+rewrite * < primalityStmt, n |-> 1021 & i |-> 0 & q |-> 0 & r |-> 0 & t |-> 0 & x |-> 0 & y |-> 0 & z |-> 0 ,epsilon,epsilon > .
+rewrite * < countPrimesPgm,epsilon > .
 
 rewrite * < divByZeroStmt, a |-> 1 & c |-> 0,epsilon,epsilon > . 
 rewrite * < divByZeroInAddStmt, c |-> 0,epsilon,epsilon > . 
@@ -72,14 +72,12 @@ rewrite * < printDivZeroStmt, a |-> 1,epsilon,epsilon > .
 rewrite * < divByZeroInLetStmt, a |-> 1,epsilon,epsilon > .
 rewrite * < HaltInLetStmt, a |-> 1,epsilon,epsilon > .
 
-search * < sumPgm > =>! Cfg:ExtendedConfiguration .
+search * < sumPgm,epsilon > =>! Cfg:ExtendedConfiguration .
 
-*** <new> Execute the new programs
-rewrite * < sum++Pgm > .
-search  * < sum++Pgm > =>! Cfg:ExtendedConfiguration .
+rewrite * < sum++Pgm,epsilon > .
+search  * < sum++Pgm,epsilon > =>! Cfg:ExtendedConfiguration .
 
-rewrite * < nondet++Pgm > .
-search  * < nondet++Pgm > =>! Cfg:ExtendedConfiguration .
-*** </new>
+rewrite * < nondet++Pgm,epsilon > .
+search  * < nondet++Pgm,epsilon > =>! Cfg:ExtendedConfiguration .
 
 quit
