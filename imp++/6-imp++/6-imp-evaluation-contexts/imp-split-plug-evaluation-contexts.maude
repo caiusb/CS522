@@ -1,4 +1,4 @@
-mod IMP-CONFIGURATIONS-EVALUATION-CONTEXTS is including IMP-SYNTAX + STATE .
+mod IMP-CONFIGURATIONS-EVALUATION-CONTEXTS is including IMP-DESUGARED-SYNTAX + STATE .
 
   including BUFFER .
 
@@ -67,5 +67,9 @@ mod IMP-SPLIT-PLUG-EVALUATION-CONTEXTS is including IMP-CONFIGURATIONS-EVALUATIO
 
   op spawn__ : Stmt Context -> Context . eq plug((spawn S1 C)[Syn]) = spawn S1 plug(C[Syn]) .
  crl split(spawn S1 S2) => (spawn S1 C)[Syn] if split(S2) => C[Syn] .
+ 
+  op let_=_in_ : Id Context Stmt -> Context .
+ crl split(let X = A in S) => (let X = C in S)[Syn] if split(A) => C[Syn] .
+  eq plug((let X = C in S)[Syn]) = let X = plug(C[Syn]) in S .
 
 endm
