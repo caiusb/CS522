@@ -1,5 +1,10 @@
 mod IMP-SEMANTICS-CHAM is including IMP-HEATING-COOLING-CHAM + STATE .
+
+  including BUFFER .
+
   subsort Pgm State < Molecule .
+  subsort Buffer < Molecule .
+  ops input output : -> Molecule .
   var X : Id .  var Xl : List{Id} .  var C : Molecule .  var Ms : Bag{Molecule} .
   var Sigma : State .  var B B2 : BExp .  var I J I1 I2 : Int .  var S S1 S2 : Stmt .
   rl {| {| X ~> C |} # {| X |-> I & Sigma |} # Ms |} => {| {| I ~> C |} # {| X |-> I & Sigma |} # Ms |} .
