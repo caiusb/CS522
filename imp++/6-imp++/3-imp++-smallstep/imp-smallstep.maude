@@ -42,14 +42,14 @@ rewrite * < haltInIfElseStmt, a |-> 1 > .
 rewrite * < haltInWhileStmt, a |-> 1 > . 
 rewrite * < haltStmt, a |-> 1 > . 
 
-rewrite * < readInAddStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readInDivStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readInIfCondStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readInIfThenStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readInIfElseStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readInWhileCondStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readInWhileBodyStmt, a |-> 1, 5 : epsilon > . 
-rewrite * < readStmt, a |-> 1, 5 : epsilon > . 
+rewrite * < readInAddStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readInDivStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readInIfCondStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readInIfThenStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readInIfElseStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readInWhileCondStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readInWhileBodyStmt, a |-> 1, 5 : epsilon, epsilon > . 
+rewrite * < readStmt, a |-> 1, 5 : epsilon, epsilon > . 
 
 rewrite * < printStmt, a |-> 1 > . 
 rewrite * < printInIfThenStmt, a |-> 1 > . 
