@@ -51,6 +51,16 @@ rewrite {| haltStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # eps
 rewrite {| readInAddStmt |} # {| a |-> 1 |} # {| input # 5 : epsilon |} # {| epsilon |} .
 rewrite {| readInDivStmt |} # {| a |-> 1 |} # {| input # 5 : epsilon |} # {| epsilon |} . 
 
+rewrite {| printStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
+rewrite {| printInIfThenStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
+rewrite {| printInIfElseStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} . 
+rewrite {| printInWhileStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
+rewrite {| printDivZeroStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} . 
+
+rewrite {| divByZeroInLetStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
+rewrite {| HaltInLetStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
+
+
 search  {| sumPgm |} =>! Sol:Solution .
 
 rewrite {| sum++Pgm |} .
