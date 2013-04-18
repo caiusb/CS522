@@ -1,0 +1,83 @@
+in ../../../builtins.maude
+in ../imp-syntax.maude
+in ../../state.maude
+in ../buffer.maude
+
+in imp-split-plug-evaluation-contexts
+
+search split(3 <= (2 + X) / 7) =>! Syn:[Syntax] .
+
+--- Below we show the three different ways to represent the reduction semantics
+--- with evaluation contexts of IMP into rewrite logic.
+--- Include which one of them you want.
+
+---in imp-semantics-evaluation-contexts-1
+---in imp-semantics-evaluation-contexts-2
+in imp-semantics-evaluation-contexts-3
+
+in ../imp-programs.maude
+
+mod TEST is including IMP-SEMANTICS-EVALUATION-CONTEXTS + IMP-PROGRAMS .  endm
+
+--- set trace on .
+
+rewrite * < sumPgm,epsilon > .
+rewrite * < collatzStmt, n |-> 10 & q |-> 0 & r |-> 0 & s |-> 0,epsilon,epsilon > .
+rewrite * < collatzPgm,epsilon > .
+rewrite * < multiplicationStmt, x |-> 25 & y |-> 5 & q |-> 0 & r |-> 0 & z |-> 0,epsilon,epsilon > .
+rewrite * < primalityStmt, n |-> 1021 & i |-> 0 & q |-> 0 & r |-> 0 & t |-> 0 & x |-> 0 & y |-> 0 & z |-> 0 ,epsilon,epsilon > .
+rewrite * < countPrimesPgm,epsilon > .
+
+rewrite * < divByZeroStmt, a |-> 1 & c |-> 0,epsilon,epsilon > . 
+rewrite * < divByZeroInAddStmt, c |-> 0,epsilon,epsilon > . 
+rewrite * < divByZeroPgm,epsilon > . 
+rewrite * < divByZeroInLLEStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < divByZeroInRLEStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < divByZeroInAndLeftStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < divByZeroInAndRightStmt, a |-> 1 ,epsilon,epsilon > . 
+rewrite * < divByZeroInNegationStmt, a |-> 1 ,epsilon,epsilon > . 
+rewrite * < divByZeroInWhileConditionStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < divByZeroinWhileBodyStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < divByZeroInIfThenBranch, a |-> 1,epsilon,epsilon > . 
+rewrite * < divByZeroInIfElseBranch, a |-> 1,epsilon,epsilon > . 
+
+rewrite * < IncInIfConditionStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < IncInIfThenStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < IncInIfElseStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < IncInWhileCondStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < IncInWhileBranchStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < IncInAddStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < IncInDivStmt, a |-> 1,epsilon,epsilon > . 
+
+rewrite * < haltInIfThenStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < haltInIfElseStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < haltInWhileStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < haltStmt, a |-> 1,epsilon,epsilon > . 
+
+rewrite * < readInAddStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readInDivStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readInIfCondStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readInIfThenStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readInIfElseStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readInWhileCondStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readInWhileBodyStmt, a |-> 1, 5 : epsilon,epsilon > . 
+rewrite * < readStmt, a |-> 1, 5 : epsilon,epsilon > . 
+
+rewrite * < printStmt, a |-> 1,epsilon,epsilon > . 
+rewrite * < printInIfThenStmt, a |-> 1,epsilon,epsilon > .
+rewrite * < printInIfElseStmt, a |-> 1,epsilon,epsilon > .
+rewrite * < printInWhileStmt, a |-> 1,epsilon,epsilon > .
+rewrite * < printDivZeroStmt, a |-> 1,epsilon,epsilon > .
+
+rewrite * < divByZeroInLetStmt, a |-> 1,epsilon,epsilon > .
+rewrite * < HaltInLetStmt, a |-> 1,epsilon,epsilon > .
+
+search * < sumPgm,epsilon > =>! Cfg:ExtendedConfiguration .
+
+rewrite * < sum++Pgm,epsilon > .
+search  * < sum++Pgm,epsilon > =>! Cfg:ExtendedConfiguration .
+
+rewrite * < nondet++Pgm,epsilon > .
+search  * < nondet++Pgm,epsilon > =>! Cfg:ExtendedConfiguration .
+
+quit

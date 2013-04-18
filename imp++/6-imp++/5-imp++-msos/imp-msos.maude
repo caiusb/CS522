@@ -1,0 +1,73 @@
+in ../../../builtins.maude
+in ../imp-syntax.maude
+in ../../state.maude
+in ../buffer.maude
+
+in imp-semantics-msos
+
+in ../imp-programs.maude
+
+mod TEST is including IMP-SEMANTICS-MSOS + IMP-PROGRAMS .  endm
+
+rewrite * < sumPgm > .
+rewrite * < collatzStmt, (state = (n |-> 10 & (q,r,s) |-> 0), halting = false) > .
+rewrite * < collatzPgm > .
+rewrite * < multiplicationStmt, (state = (x |-> 25 & y |-> 5 & (q,r,z) |-> 0), halting = false) > .
+rewrite * < primalityStmt, (state = (n |-> 1021 & (i,q,r,t,x,y,z) |-> 0), halting = false) > .
+rewrite * < countPrimesPgm > .
+
+rewrite * < top divByZeroStmt, (state = (a |-> 1 & c |-> 0), halting = false) > . 
+rewrite * < top divByZeroInAddStmt, state = (c |-> 0), halting = false > . 
+rewrite * < divByZeroPgm > . 
+rewrite * < top divByZeroInLLEStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInRLEStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInAndLeftStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInAndRightStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInNegationStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInWhileConditionStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroinWhileBodyStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInIfThenBranch, state = (a |-> 1), halting = false > . 
+rewrite * < top divByZeroInIfElseBranch, state = (a |-> 1), halting = false > . 
+
+rewrite * < IncInIfConditionStmt, state = (a |-> 1) > . 
+rewrite * < IncInIfThenStmt, state = (a |-> 1) > . 
+rewrite * < IncInIfElseStmt, state = (a |-> 1) > . 
+rewrite * < IncInWhileCondStmt, state = (a |-> 1) > . 
+rewrite * < IncInWhileBranchStmt, state = (a |-> 1) > . 
+rewrite * < IncInAddStmt, state = (a |-> 1) > . 
+rewrite * < IncInDivStmt, state = (a |-> 1) > . 
+
+rewrite * < top haltInIfThenStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top haltInIfElseStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top haltInWhileStmt, state = (a |-> 1), halting = false > . 
+rewrite * < top haltStmt, state = (a |-> 1), halting = false  > . 
+
+rewrite * < readInAddStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readInDivStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readInIfCondStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readInIfThenStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readInIfElseStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readInWhileCondStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readInWhileBodyStmt, state = (a |-> 1), input = 5 > . 
+rewrite * < readStmt, state = (a |-> 1), input = 5 > . 
+
+rewrite * < printStmt, state = (a |-> 1), input = epsilon, output = epsilon > . 
+rewrite * < printInIfThenStmt, state = (a |-> 1), input = epsilon, output = epsilon > . 
+rewrite * < printInIfElseStmt, state = (a |-> 1), input = epsilon, output = epsilon > . 
+rewrite * < printInWhileStmt, state = (a |-> 1), input = epsilon, output = epsilon > . 
+rewrite * < printDivZeroStmt, state = (a |-> 1), input = epsilon, output = epsilon > . 
+
+rewrite * < divByZeroInLetStmt, state = (a |-> 1) > .
+rewrite * < HaltInLetStmt, state = (a |-> 1) > .
+
+search * < sumPgm > =>! Cfg:ExtendedConfiguration .
+
+*** <new> Execute the new programs
+rewrite * < sum++Pgm > .
+search  * < sum++Pgm > =>! Cfg:ExtendedConfiguration .
+
+rewrite * < nondet++Pgm > .
+search  * < nondet++Pgm > =>! Cfg:ExtendedConfiguration .
+*** </new>
+
+quit
