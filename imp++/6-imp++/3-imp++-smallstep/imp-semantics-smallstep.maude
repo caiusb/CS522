@@ -64,7 +64,7 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
  crl o < true && B2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < B2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
 
 --- increment
- crl o < ++ X,Sigma,OmegaIn,OmegaOut > => < Sigma(X) +Int 1,Sigma[(Sigma(X) +Int 1) / X],OmegaIn,OmegaOut > if Sigma(X) =/=Bool undefined .
+ crl o < ++ X,Sigma,OmegaIn > => < Sigma(X) +Int 1,Sigma[(Sigma(X) +Int 1) / X],OmegaIn > if Sigma(X) =/=Bool undefined .
 
 --- read & print
   rl o < read(), Sigma, I : OmegaIn > => < I,Sigma,OmegaIn > .
@@ -75,7 +75,7 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
   rl o < {S},Sigma,OmegaIn,OmegaOut > => < S,Sigma,OmegaIn,OmegaOut > .
 
 --- assignment
- crl o < X = A ;,Sigma,OmegaIn,OmegaOut > => < X = A' ;,Sigma',OmegaIn',OmegaOut > if o < A,Sigma,OmegaIn,OmegaOut > => < A',Sigma',OmegaIn',OmegaOut > .
+ crl o < X = A ;,Sigma,OmegaIn,OmegaOut > => < X = A' ;,Sigma',OmegaIn',OmegaOut > if o < A,Sigma,OmegaIn > => < A',Sigma',OmegaIn' > .
  crl o < X = I ;,Sigma,OmegaIn,OmegaOut > => < {},Sigma[I / X],OmegaIn,OmegaOut > if Sigma(X) =/=Bool undefined .
  crl o < X = A ;,Sigma,OmegaIn,OmegaOut > => < halting,Sigma',OmegaIn',OmegaOut > if o < A,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
 
