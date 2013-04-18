@@ -41,7 +41,7 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
  crl o < I1 / I2,Sigma,OmegaIn > => < I1 /Int I2,Sigma,OmegaIn > if I2 =/=Bool 0 .
  crl o < A1 / A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < A1,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
  crl o < A1 / A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > if o < A2,Sigma,OmegaIn > => < error,Sigma',OmegaIn' > .
- crl o < I1 / I2,Sigma,OmegaIn > => < error,Sigma,OmegaIn > if I2 ==Bool 0 .
+  rl o < I1 / 0,Sigma,OmegaIn > => < error,Sigma,OmegaIn > .
 
 --- less than
  crl o < A1 <= A2,Sigma,OmegaIn > => < A1' <= A2,Sigma',OmegaIn' > if o < A1,Sigma,OmegaIn > => < A1',Sigma',OmegaIn' > .
