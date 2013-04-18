@@ -95,8 +95,10 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
   rl o < while (B) S,Sigma,OmegaIn,OmegaOut > => < if (B) {S while (B) S} else {},Sigma,OmegaIn,OmegaOut > .
 
 --- program
-  rl o < P > => < P, .State > .
-  rl o < P, Sigma > => < P, Sigma, epsilon, epsilon > .
+  rl o < P > => < P, .State > . --- backward compatibility
+  rl o < P, Sigma > => < P, Sigma, epsilon, epsilon > . --- backward compatibility
+
+--- let
  crl o < let X = A in S,Sigma,OmegaIn,OmegaOut > => < let X = A' in S,Sigma',OmegaIn',OmegaOut > if o < A,Sigma,OmegaIn > => < A',Sigma',OmegaIn' > .
  crl o < let X = I in S,Sigma,OmegaIn,OmegaOut > => < let X = Sigma'(X) in S',Sigma'[Sigma(X) / X],OmegaIn',OmegaOut' >
   if o < S,Sigma[I / X],OmegaIn,OmegaOut > => < S',Sigma',OmegaIn',OmegaOut' > .
