@@ -8,6 +8,7 @@ in imp-semantics-smallstep
 in ../imp-programs.maude
 
 mod TEST is including IMP-SEMANTICS-SMALLSTEP + IMP-PROGRAMS .  endm
+rewrite * < emptyPgm > .
 
 rewrite * < sumPgm > .
 rewrite * < collatzStmt, n |-> 10 & (q,r,s) |-> 0 > .

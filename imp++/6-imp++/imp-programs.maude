@@ -1,5 +1,5 @@
 mod IMP-PROGRAMS is including IMP-SYNTAX .
-  ops sumPgm collatzPgm countPrimesPgm : -> Pgm .
+  ops emptyPgm sumPgm collatzPgm countPrimesPgm : -> Pgm .
   ops collatzStmt multiplicationStmt primalityStmt : -> Stmt .
   op sum++Pgm : -> Pgm .
   op nondet++Pgm : -> Pgm .
@@ -11,6 +11,11 @@ mod IMP-PROGRAMS is including IMP-SYNTAX .
   ops printStmt printInIfThenStmt printInIfElseStmt printInWhileStmt printDivZeroStmt : -> Stmt .
   ops spawnStmt : -> Stmt .
   ops divByZeroInLetStmt, HaltInLetStmt : -> Stmt .
+
+  eq emptyPgm = (
+     int x ;
+     x = 3 + 2 ;
+  ) .
 
   eq sumPgm = (
      int n, s ;
