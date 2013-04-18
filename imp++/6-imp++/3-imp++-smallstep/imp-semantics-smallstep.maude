@@ -94,6 +94,9 @@ mod IMP-SEMANTICS-SMALLSTEP is including IMP-CONFIGURATIONS-SMALLSTEP .
 --- while
   rl o < while (B) S,Sigma,OmegaIn,OmegaOut > => < if (B) {S while (B) S} else {},Sigma,OmegaIn,OmegaOut > .
 
+--- halt
+  rl o < halt ;,Sigma,OmegaIn,OmegaOut > => < halting,Sigma,OmegaIn,OmegaOut > .
+
 --- program
   rl o < P > => < P, .State > . --- backward compatibility
   rl o < P, Sigma > => < P, Sigma, epsilon, epsilon > . --- backward compatibility
