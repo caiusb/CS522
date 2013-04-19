@@ -15,6 +15,7 @@ in ../imp-programs.maude
 
 mod TEST is including IMP-SEMANTICS-CHAM + IMP-PROGRAMS .  endm
 
+rewrite {| {| emptyPgm |} # {| .State |} |} .
 rewrite {| {| sumPgm |} # {| .State |} |} .
 rewrite {| {| collatzStmt |} # {| n |-> 10 & q |-> 0 & r |-> 0 & s |-> 0 |} |} .
 rewrite {| {| collatzPgm |} #  {| .State |} |} .
@@ -22,51 +23,51 @@ rewrite {| {| multiplicationStmt |} # {| x |-> 25 & y |-> 5 & q |-> 0 & r |-> 0 
 rewrite {| {| primalityStmt |} # {| n |-> 1021 & i |-> 0 & q |-> 0 & r |-> 0 & t |-> 0 & x |-> 0 & y |-> 0 & z |-> 0 |} |} .
 rewrite {| {| countPrimesPgm |} # {| .State |} |} .
 
-rewrite {| divByZeroStmt |} # {| a |-> 1 & c |-> 0 |} # {| input # epsilon |} # {| output # epsilon |} .
-rewrite {| divByZeroInAddStmt |} # {| c |-> 0 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| divByZeroPgm |} # {| .State |} .  
-rewrite {| divByZeroInLLEStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .
-rewrite {| divByZeroInRLEStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| divByZeroInAndLeftStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .
-rewrite {| divByZeroInAndRightStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| divByZeroInNegationStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| divByZeroInWhileConditionStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .
-rewrite {| divByZeroinWhileBodyStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| divByZeroInIfThenBranch |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .  
-rewrite {| divByZeroInIfElseBranch |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
+rewrite {| {| divByZeroStmt |} # {| a |-> 1 & c |-> 0 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| divByZeroInAddStmt |} # {| c |-> 0 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| divByZeroPgm |} # {| .State |} |} .  
+rewrite {| {| divByZeroInLLEStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| divByZeroInRLEStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| divByZeroInAndLeftStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| divByZeroInAndRightStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| divByZeroInNegationStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| divByZeroInWhileConditionStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| divByZeroinWhileBodyStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| divByZeroInIfThenBranch |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .  
+rewrite {| {| divByZeroInIfElseBranch |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
 
-rewrite {| IncInIfConditionStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .
-rewrite {| IncInIfThenStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| IncInIfElseStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| IncInWhileCondStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| IncInWhileBranchStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| IncInAddStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| IncInDivStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
+rewrite {| {| IncInIfConditionStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| IncInIfThenStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| IncInIfElseStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| IncInWhileCondStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| IncInWhileBranchStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| IncInAddStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| IncInDivStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
 
-rewrite {| haltInIfThenStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .
-rewrite {| haltInIfElseStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
-rewrite {| haltInWhileStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} .  
-rewrite {| haltStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} . 
+rewrite {| {| haltInIfThenStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| haltInIfElseStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| haltInWhileStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .  
+rewrite {| {| haltStmt |} # {| a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
 
-rewrite {| readInAddStmt |} # {| a |-> 1 |} # {| input # 5 : epsilon |} # {| epsilon |} .
-rewrite {| readInDivStmt |} # {| a |-> 1 |} # {| input # 5 : epsilon |} # {| epsilon |} . 
+rewrite {| {| readInAddStmt |} # {| a |-> 1 |} # {| input # 5 : epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| readInDivStmt |} # {| a |-> 1 |} # {| input # 5 : epsilon |} # {| output # epsilon |} |} . 
 
-rewrite {| printStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
-rewrite {| printInIfThenStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
-rewrite {| printInIfElseStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} . 
-rewrite {| printInWhileStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
-rewrite {| printDivZeroStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} . 
+rewrite {| {| printStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| printInIfThenStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| printInIfElseStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
+rewrite {| {| printInWhileStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| printDivZeroStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} . 
 
-rewrite {| divByZeroInLetStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
-rewrite {| HaltInLetStmt |} # {|  a |-> 1 |} # {| epsilon |} # {| epsilon |} .
+rewrite {| {| divByZeroInLetStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
+rewrite {| {| HaltInLetStmt |} # {|  a |-> 1 |} # {| input # epsilon |} # {| output # epsilon |} |} .
 
 
 search  {| sumPgm |} =>! Sol:Solution .
 
-rewrite {| sum++Pgm |} .
+rewrite {| {| sum++Pgm |} |} .
 search  {| sum++Pgm |} =>! Sol:Solution .
 
-rewrite {| nondet++Pgm |} .
+rewrite {| {| nondet++Pgm |} |} .
 search  {| nondet++Pgm |} =>! Sol:Solution .
 
 quit
