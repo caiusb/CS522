@@ -25,7 +25,7 @@ mod IMP-SEMANTICS-CHAM is including IMP-HEATING-COOLING-CHAM + STATE .
   rl {| {| ++ X ~> C |} # {| X |-> I & Sigma |} # Ms |}
   => {| {| I +Int 1 ~> C |} # {| X |-> (I +Int 1) & Sigma |} # Ms |} .
 
-  rl {| (I / 0 ~> C) # Ms |} => {| {} # Ms |} .
+  rl {| ( I / 0 ~> C) # Ms |} => {| {} # Ms |} .
   rl {| (halt ; ~> C) # Ms |} => {| {} # Ms |} .
 
   var OmegaIn OmegaOut : Buffer .
