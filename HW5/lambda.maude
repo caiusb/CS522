@@ -213,23 +213,39 @@ mod COMBINATORY-LOGIC is
 --- Like in the case of lambda with substitution above, making
 --- these rules equations may yield faster executions sometimes,
 --- but in general it may lead to unsoundness and non-termination.
-  rl K ...HW5...
-  rl S ...HW5...
+  rl K E F => E .
+  rl S E F G => E G (F G) .
 endm
 
 --- Testing combinators
+rew K x y .	     --- basic rule
+rew S x y z .	     --- basic rule
 rew S K K x .        --- S K K is the identity
 rew S K K (S K K) .  --- S K K is the identity
 
 mod LAMBDA-WITH-COMBINATORS is
   including PL-BOOL .
+  op [_]_ : Var Exp -> Exp .
 --- It does not really matter whether we include the restricted
 --- or the unrestricted variant of the original lambda-abstraction,
 --- because that construct gets eliminated anyway.
   including LAMBDA-ABSTRACTION-UNRESTRICTED .
   including COMBINATORY-LOGIC .
-...HW5... (equations defining the translation from lambda calculus to combinators)
+--- ...HW5... (equations defining the translation from lambda calculus to combinators)
+  vars x y : Var .
+  vars p p' : Exp .
+  rl (/\ x . p) => [x] p .
+  rl [x] x => S K K .
+  rl [x] y => K y .
+  rl [x] p p' => S([x] p)([x] p') .
+  rl [x] K => K K .
+  rl [x] S => K S .
 endm
+
+--- Testing translation
+rew (/\ x . x) .
+rew (/\ x . /\ y . /\ z . x z ( y z )) .
+rew (/\ x . /\ y . (x (x y))) .
 
 mod DE-BRUIJN-SYNTAX is
   including APPLICATION .
