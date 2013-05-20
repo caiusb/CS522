@@ -176,7 +176,7 @@ mod LAMBDA-STANDARD is
 --- do not obey the frozeness declarations, so one will not
 --- achieve the desired evaluation strategy; in particular,
 --- one may have non-termination where it should terminate.
-  rl (/\ X . E) F => ...HW5...  --- beta reduction
+  rl (/\ X . E) F => E[F / X] . --- beta reduction
 endm
 
 mod LAMBDA-CALL-BY-VALUE is
