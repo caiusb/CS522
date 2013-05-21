@@ -396,8 +396,6 @@ rew and $false (and y z) .
 rew and (and $false $true) $false t f .
 rew and $false (and $true $false) t f .
 
-q
-
 mod CHURCH-NUMERALS is
   including CURRYING .
   ops $0 $1 $2 $3 $4 $5 succ succ' plus mult power : -> Exp .
@@ -410,8 +408,8 @@ mod CHURCH-NUMERALS is
   eq succ  = /\ n s z . n s (s z) .
   eq succ' = /\ n s z . s (n s z) .
   eq plus  = /\ m n s z . m s (n s z) .
-  eq mult  = ...HW5...
-  eq power = ...HW5...
+  eq mult  = /\ m n s . m (n s)  .
+  eq power = /\ m n . n m .
 endm
 
 mod DISPLAY-CHURCH-NUMERALS is
@@ -441,6 +439,8 @@ rew display(plus (succ $5) $4) .    --- should be equal to the following
 rew display(succ (plus $5 $4)) .
 rew display(mult $5 $5) .           --- $(25)
 rew display(power $5 $3) .          --- $(125); slow with combinators
+
+q
 
 mod CHURCH-PAIRS is
   including CHURCH-BOOLEANS .
