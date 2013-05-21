@@ -359,7 +359,7 @@ mod CURRYING is
 --- We do a bit of a syntactic stratch here: using application
 --- to group the binding variables.  It works: it initially
 --- parses uncurried terms to kinds, then to sorts after currying.
-  eq /\ Xs X . E = ...HW5...
+  eq /\ Xs X . E = /\ Xs . /\ X . E .
 endm
 
 --- Testing currying
