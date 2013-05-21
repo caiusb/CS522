@@ -294,8 +294,6 @@ rew (/\ /\ {0}) x .
 rew (/\ /\ {1}) x .
 rew (/\ /\ x {1} y) x .
 
-q
-
 mod DE-BRUIJN-OPTIMIZED is
   including DE-BRUIJN-SYNTAX .
 ---...HW5... (equations defining the substitution and lifting, plus one rule for beta-reduction)
