@@ -440,12 +440,13 @@ rew display(succ (plus $5 $4)) .
 rew display(mult $5 $5) .           --- $(25)
 rew display(power $5 $3) .          --- $(125); slow with combinators
 
-q
-
 mod CHURCH-PAIRS is
   including CHURCH-BOOLEANS .
   ops pair 1st 2nd : -> Exp .
-...HW5... (3 equations)
+---...HW5... (3 equations)
+  eq pair = /\ x y z . z x y .
+  eq 1st = /\ p . p (/\ x y . x) .
+  eq 2nd = /\ p . p (/\ x y . y) .
 endm
 
 --- Testing pairing
