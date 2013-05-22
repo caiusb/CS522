@@ -438,7 +438,7 @@ rew display(plus $0 $5) .           --- testing Peano for particular values
 rew display(plus (succ $5) $4) .    --- should be equal to the following
 rew display(succ (plus $5 $4)) .
 rew display(mult $5 $5) .           --- $(25)
-rew display(power $5 $3) .          --- $(125); slow with combinators
+---rew display(power $5 $3) .          --- $(125); slow with combinators
 
 mod CHURCH-PAIRS is
   including CHURCH-BOOLEANS .
@@ -471,7 +471,7 @@ endm
 
 --- Testing Fibonacci
 rew display(fibo $4) .
-rew display(fibo (mult $5 $2)) .  --- slow
+---rew display(fibo (mult $5 $2)) .  --- slow
 
 mod CHURCH-PREDECESSOR is
   including DISPLAY-CHURCH-NUMERALS + CHURCH-PAIRS .
