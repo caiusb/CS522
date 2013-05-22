@@ -463,17 +463,23 @@ rew 2nd p .
 mod CHURCH-FIBONACCI is
   including DISPLAY-CHURCH-NUMERALS + CHURCH-PAIRS .
   ops start-fibo step-fibo fibo : -> Exp .
-...HW5... (3 equations)
+---...HW5... (3 equations)
+  eq start-fibo = pair $0 $1 .
+  eq step-fibo = /\ p . pair (2nd p) (plus (1st p) (2nd p)) .
+  eq fibo = /\ n . 1st (n step-fibo start-fibo) .
 endm
 
 --- Testing Fibonacci
 rew display(fibo $4) .
-***rew display(fibo (mult $5 $2)) .  --- slow
+rew display(fibo (mult $5 $2)) .  --- slow
 
 mod CHURCH-PREDECESSOR is
   including DISPLAY-CHURCH-NUMERALS + CHURCH-PAIRS .
   ops start-pred step-pred pred : -> Exp .
-...HW5... (3 equations)
+---...HW5... (3 equations)
+  eq start-pred = pair $0 $0 .
+  eq step-pred = /\ p . pair (2nd p) (plus (2nd p) $1) .
+  eq pred = /\ n . 1st (n step-pred start-pred) .
 endm
 
 --- Testing Church predecessor
