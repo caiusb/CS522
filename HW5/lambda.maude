@@ -521,7 +521,7 @@ mod FIXED-POINT-COMBINATORS is
   including CURRYING .
 --- Here are several classic combinators:
   ops Y-name Y-value Y-Turing Y-Turing-value Y-Klop L : -> Exp .
-  eq Y-name         = ...HW5...
+  eq Y-name         = /\ f . (/\ x . f (x x)) (/\ x . f (x x)) .
   eq Y-value        = /\ f . (/\ x . f (/\ y . x x y)) (/\ x . f (/\ y . x x y)) .
   eq Y-Turing       = (/\ x f . f (x x f)) (/\ x f . f (x x f)) .
   eq Y-Turing-value = (/\ x f . (f (/\ y . x x f y))) (/\ x f . (f (/\ y . x x f y))) .
