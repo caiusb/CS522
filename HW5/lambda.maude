@@ -298,6 +298,32 @@ rew (/\ /\ x {1} y) x .
 mod DE-BRUIJN-OPTIMIZED is
   including DE-BRUIJN-SYNTAX .
 ---...HW5... (equations defining the substitution and lifting, plus one rule for beta-reduction)
+  op up(_) : Exp -> Exp .
+  op down(_) : Exp -> Exp .
+  op ^(_,_,_) : Int Int Exp -> Exp .
+
+  vars E' E E1 E2 : Exp .
+  vars m n : Int .
+  var X : Id .
+
+--- beta reduction
+  rl (/\ E') E => E'[E / {0}] .
+
+--- lifting
+  eq (E1 E2) [E / {n}] = (E1[E / {n}]) (E2[E / {n}]) .
+  eq (/\ E')[E / {n}] = /\ (E'[up(E) / {n}]) .
+  eq {m} [E / {n}] = if m ==Bool n then E else (if m >Int n then {m -Int 1} else {m} fi) fi .
+  eq X[E / {n}] = X .
+
+--- up down
+  eq up(E) = ^(1,0,E) .
+  eq down(E) = ^(-1,0,E) .
+
+--- arrow
+  eq ^(c,n,E1 E2) = (^(c,n,E1)) (^(c,n,E2)) .
+  eq ^(c,n,(/\ E)) = /\ ^(c, n +Int 1, E) . 
+  eq ^(c,n,{m}) = if m >Int n then {m +Int c} else {m} fi .
+  eq ^(c,n,X) = X .
 endm
 
 --- Testing optimized De Bruijn
@@ -305,6 +331,8 @@ rew (/\ {0}) x .
 rew (/\ /\ {0}) x .
 rew (/\ /\ {1}) x .
 rew (/\ /\ x {1} y) x .
+
+q
 
 mod LAMBDA-WITH-DE-BRUIJN is
 --- There are (at least) two ways to transform a lambda expression into
