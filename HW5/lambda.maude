@@ -259,11 +259,34 @@ mod DE-BRUIJN-SYNTAX is
   op _[_/_] : Exp Exp Int -> [Exp] [prec 10] .
 endm
 
-mod DE-BRUIJN is
+mod ARROWS is
+  including APPLICATION .
+  including PL-INT .
   including DE-BRUIJN-SYNTAX .
+  
   op up(_) : Exp -> Exp .
   op down(_) : Exp -> Exp .
   op ^(_,_,_) : Int Int Exp -> Exp .
+
+  vars E E1 E2 : Exp .
+  vars c m n : Int .
+  var X : Id .
+
+--- up down
+  eq up(E) = ^(1,0,E) .
+  eq down(E) = ^(-1,0,E) .
+
+--- arrow
+  eq ^(c,n,E1 E2) = (^(c,n,E1)) (^(c,n,E2)) .
+  eq ^(c,n,(/\ E)) = /\ ^(c, n +Int 1, E) . 
+  eq ^(c,n,{m}) = if m >Int n then {m +Int c} else {m} fi .
+  eq ^(c,n,X) = X .
+
+endm 
+
+mod DE-BRUIJN is
+  including DE-BRUIJN-SYNTAX .
+  including ARROWS .
 
   vars E' E E1 E2 : Exp .
   vars c m n : Int .
@@ -278,15 +301,6 @@ mod DE-BRUIJN is
   eq {m}[E / {n}] = if m ==Bool n then E else {m} fi .
   eq X[E / {n}] = X .
 
---- up down
-  eq up(E) = ^(1,0,E) .
-  eq down(E) = ^(-1,0,E) .
-
---- arrow
-  eq ^(c,n,E1 E2) = (^(c,n,E1)) (^(c,n,E2)) .
-  eq ^(c,n,(/\ E)) = /\ ^(c, n +Int 1, E) . 
-  eq ^(c,n,{m}) = if m >Int n then {m +Int c} else {m} fi .
-  eq ^(c,n,X) = X .
 endm
 
 --- Testing De Bruijn
@@ -297,11 +311,8 @@ rew (/\ /\ x {1} y) x .
 
 mod DE-BRUIJN-OPTIMIZED is
   including DE-BRUIJN-SYNTAX .
+  including ARROWS .
 ---...HW5... (equations defining the substitution and lifting, plus one rule for beta-reduction)
-  op up(_) : Exp -> Exp .
-  op down(_) : Exp -> Exp .
-  op ^(_,_,_) : Int Int Exp -> Exp .
-
   vars E' E E1 E2 : Exp .
   vars m n : Int .
   var X : Id .
@@ -309,21 +320,12 @@ mod DE-BRUIJN-OPTIMIZED is
 --- beta reduction
   rl (/\ E') E => E'[E / {0}] .
 
---- lifting
+--- substition and lifting
   eq (E1 E2) [E / {n}] = (E1[E / {n}]) (E2[E / {n}]) .
-  eq (/\ E')[E / {n}] = /\ (E'[up(E) / {n}]) .
-  eq {m} [E / {n}] = if m ==Bool n then E else (if m >Int n then {m -Int 1} else {m} fi) fi .
+  eq (/\ E')[E / {n}] = /\ (E'[up(E) / {n +Int 1}]) .
+  eq {m}[E / {n}] = if (m ==Bool n) then E else (if (m >Int n) then {m -Int 1} else {m} fi ) fi .
   eq X[E / {n}] = X .
 
---- up down
-  eq up(E) = ^(1,0,E) .
-  eq down(E) = ^(-1,0,E) .
-
---- arrow
-  eq ^(c,n,E1 E2) = (^(c,n,E1)) (^(c,n,E2)) .
-  eq ^(c,n,(/\ E)) = /\ ^(c, n +Int 1, E) . 
-  eq ^(c,n,{m}) = if m >Int n then {m +Int c} else {m} fi .
-  eq ^(c,n,X) = X .
 endm
 
 --- Testing optimized De Bruijn
@@ -331,8 +333,6 @@ rew (/\ {0}) x .
 rew (/\ /\ {0}) x .
 rew (/\ /\ {1}) x .
 rew (/\ /\ x {1} y) x .
-
-q
 
 mod LAMBDA-WITH-DE-BRUIJN is
 --- There are (at least) two ways to transform a lambda expression into
