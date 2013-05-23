@@ -357,7 +357,9 @@ mod LAMBDA-WITH-DE-BRUIJN is
   op de-Bruijn-ify : Exp Var Int -> [Exp] .
   var X Y : Var .  var E E1 E2 : Exp .  var N : Int .  var B : Builtin .
   eq /\ X . E = /\ de-Bruijn-ify(E, X, 0) .
----...HW5...
+  eq de-Bruijn-ify(E1,E2,X,N) = de-Bruijn-ify(E1,X,N) de-Bruijn-ify(E2,X,N) .
+  eq de-Bruijn-ify(/\ E,X,N) = /\ de-Bruijn-ify(E,X,N +Int 1) .
+  eq de-Bruijn-ify(Y,X,N) = if X ==Bool Y then N else Y .
 endm
 
 mod LAMBDA is
