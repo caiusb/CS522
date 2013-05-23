@@ -267,25 +267,26 @@ mod DE-BRUIJN is
 
   vars E' E E1 E2 : Exp .
   vars c m n : Int .
+  var X : Id .
 
 --- DeBruijn beta reduction
-  rl /\ E' E => down(E'[up(E) / 0]) .
+   rl (/\ E') E => down(E'[up(E) / {0}]) .
 
 --- substitution and lifting
-  rl (E1 E2)[E / n] => (E1[E / n])(E2[E / n]) .
-  rl (/\ E')[E / n] => /\(E'[up(E) / (n +Int 1)]) .
-  rl {m}[E / m] => E .
-  rl {m}[E / n] => {m} .
+  eq (E1 E2)[E / {n}] = (E1[E / {n}])(E2[E / {n}]) .
+  eq (/\ E')[E / {n}] = /\(E'[up(E) / {n +Int 1}]) .
+  eq {m}[E / {n}] = if m ==Bool n then E else {m} fi .
+  eq X[E / {n}] = X .
 
 --- up down
-  rl up(E) => ^(1,0,E) .
-  rl down(E) => ^(-1,0,E) .
+  eq up(E) = ^(1,0,E) .
+  eq down(E) = ^(-1,0,E) .
 
 --- arrow
-  rl ^(c,n,E1 E2) => (^(c,n,E1)) (^(c,n,E2)) .
-  rl ^(c,n,(/\ E)) => /\ (^(c, (n +Int 1), E)) . 
- crl ^(c,n,{m}) => {m +Int c} if m >Int n .
-  rl ^(c,n,{m}) => {m} .
+  eq ^(c,n,E1 E2) = (^(c,n,E1)) (^(c,n,E2)) .
+  eq ^(c,n,(/\ E)) = /\ ^(c, n +Int 1, E) . 
+  eq ^(c,n,{m}) = if m >Int n then {m +Int c} else {m} fi .
+  eq ^(c,n,X) = X .
 endm
 
 --- Testing De Bruijn
