@@ -1,6 +1,7 @@
 mod PCF-CONFIGURATIONS-BIGSTEP is including PCF-SYNTAX .
   sort Configuration .
   op <_> : Exp -> Configuration .
+  op <_> : Bool -> Configuration .
 endm
 
 mod PCF-SEMANTICS-BIGSTEP is including PCF-CONFIGURATIONS-BIGSTEP .
