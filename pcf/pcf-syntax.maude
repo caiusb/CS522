@@ -6,13 +6,13 @@ mod PCF-SYNTAX is
   subsort Nat < Type .
   subsort Bool < Type .
 
-  op 0 : -> Nat .
-  op succ_ : Nat -> Nat .
-  op pred_ : Nat -> Nat .
-  op true : -> Bool .
-  op false : -> Bool .
-  op zero?_ : Nat -> Bool .
-  op cond___ : Bool Type Type -> Type .
+  op 0 : -> Exp .
+  op succ_ : Exp -> Exp .
+  op pred_ : Exp -> Exp .
+  op true : -> Exp .
+  op false : -> Exp .
+  op zero?_ : Exp -> Exp .
+  op cond___ : Bool Exp Exp -> Exp .
   ops a b c d e f g h i j k l m n o p q r s t u v w x y z : -> Var . 
   op __ : Exp Exp -> Exp .
   op /\ _:_._ : Var Type Exp -> Exp .
