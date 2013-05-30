@@ -7,8 +7,8 @@ mod PCF-SYNTAX is
   subsort Bool < Type .
 
   op 0 : -> Nat .
-  op succ_ : Nat -> Exp .
-  op pred_ : Nat -> Exp .
+  op succ_ : Nat -> Nat .
+  op pred_ : Nat -> Nat .
   op true : -> Bool .
   op false : -> Bool .
   op zero?_ : Nat -> Bool .
