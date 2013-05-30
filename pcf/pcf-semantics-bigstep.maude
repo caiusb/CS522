@@ -5,5 +5,10 @@ mod PCF-CONFIGURATIONS-BIGSTEP is including PCF-SYNTAX .
 endm
 
 mod PCF-SEMANTICS-BIGSTEP is including PCF-CONFIGURATIONS-BIGSTEP .
+  var N : Nat .
+  var E : Exp .
+
+  crl < zero? N > => < true > if < N > => < 0 > .
+  rl < zero? N > => < false > .
 
 endm
