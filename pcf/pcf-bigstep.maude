@@ -5,4 +5,7 @@ mod PCF-BIGSTEP is including PCF-SEMANTICS-BIGSTEP .
 
 endm 
 
+rew < zero? 0 > .
+rew < zero? (succ 0) > .
+
 q
