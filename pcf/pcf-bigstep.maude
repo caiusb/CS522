@@ -1,0 +1,8 @@
+in pcf-syntax.maude
+in pcf-semantics-bigstep.maude
+
+mod PCF-BIGSTEP is including PCF-SEMANTICS-BIGSTEP .
+
+endm 
+
+q
