@@ -1,0 +1,20 @@
+set include BOOL off .
+
+mod PCF-SYNTAX is
+  sorts Var Type Exp .
+  sorts Nat Bool .
+  subsort Nat < Type .
+  subsort Bool < Type .
+
+  op 0 : -> Nat .
+  op succ_ : Nat -> Exp .
+  op pred_ : Nat -> Exp .
+  op true : -> Bool .
+  op false : -> Bool .
+  op zero?_ : Nat -> Bool .
+  op cond___ : Bool Type Type -> Type .
+  ops a b c d e f g h i j k l m n o p q r s t u v w x y z : -> Var . 
+  op __ : Exp Exp -> Exp .
+  op /\ _:_._ : Var Type Exp -> Exp .
+  op u _:_._ : Var Type Exp -> Exp .
+endm
